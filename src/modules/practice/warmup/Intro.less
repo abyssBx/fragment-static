@@ -1,0 +1,31 @@
+@import "../../../style/variable";
+
+.warm-up-intro {
+  height: 100%;
+  .header {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 2px solid @color_theme;
+    text-align: center;
+  }
+  .intro-container {
+    height: ~"calc(100% - 70px)";
+    overflow: auto;
+    > .audio {
+      > audio {
+        width: 100%;
+      }
+    }
+    > .picture {
+      width: 100%;
+      > img {
+        width: 100%;
+      }
+    }
+    > .analysis {
+      width: 100%;
+      white-space: normal;
+      word-break: break-all;
+    }
+  }
+}
