@@ -30,7 +30,15 @@ export class PlanMain extends React.Component <any, any> {
     loadPlan().then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState({ planData: msg })
+      if (code === 200) {
+        if (msg !== null) {
+          this.setState({ planData: msg })
+        } else {
+          this.context.router.push({
+            pathname: '/fragment/problem/list',
+          })
+        }
+      }
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
@@ -70,7 +78,7 @@ export class PlanMain extends React.Component <any, any> {
             </div>
             <div className="body">
               <div className="title">{typeMap[item.type]}</div>
-              <div className="sub-title">{item.knowledge.knowledge}</div>
+              <div className="sub-title">{item.knowledge ? item.knowledge.knowledge : ''}</div>
             </div>
             <div className="footer">
 
