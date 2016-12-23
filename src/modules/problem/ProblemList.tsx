@@ -52,7 +52,7 @@ export class ProblemList extends React.Component <any, any> {
       return
     }
     dispatch(startLoad())
-    submitProblemList({ problemList: problemListSelected }).then(res => {
+    submitProblemList({ problemIdList: problemListSelected }).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200)  this.context.router.push({ pathname: '/fragment/problem/priority' })
