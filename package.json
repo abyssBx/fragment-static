@@ -34,7 +34,7 @@
     "react": "^15.3.0",
     "react-document-meta": "^2.0.3",
     "react-dom": "^15.3.0",
-    "react-lite": "^0.15.16",
+    "react-lite": "^0.15.30",
     "react-motion": "^0.4.5",
     "react-rangeslider": "^1.0.9",
     "react-redux": "^4.4.5",

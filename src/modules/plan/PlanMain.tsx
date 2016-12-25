@@ -48,7 +48,7 @@ export class PlanMain extends React.Component <any, any> {
 
   onPracticeSelected(item) {
     const { series, sequence, knowledge } = item
-    if (knowledge.appear === 0) {
+    if (!knowledge.appear) {
       this.context.router.push({
         pathname: '/fragment/practice/warmup/intro',
         query: { series, sequence, id: knowledge.id }

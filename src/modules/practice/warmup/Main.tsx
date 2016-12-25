@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { remove, set } from "lodash";
+import { remove, set, merge } from "lodash";
 import "./Main.less";
 import { loadWarmUpPractice, loadKnowledgeIntro, answer } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
@@ -73,7 +73,7 @@ export class Main extends React.Component <any, any> {
 
   setChoice(cb) {
     let { list, currentIndex, selected } = this.state
-    set(list, `practice.${currentIndex}.selected`)
+    set(list, `practice.${currentIndex}.choice`, selected)
     this.setState({ list }, () => {
       this.setState({ selected: [], currentIndex: currentIndex + 1 })
     })
@@ -95,10 +95,13 @@ export class Main extends React.Component <any, any> {
       console.log('complete')
       this.setChoice(p => {
         dispatch(startLoad())
-        answer(p).then(res => {
+        answer({ practice: p }).then(res => {
           dispatch(endLoad())
           const { code, msg } = res
-          if (code === 200)  this.context.router.push({ pathname: '/fragment/practice/warmup/result', query: msg })
+          if (code === 200)  this.context.router.push({
+            pathname: '/fragment/practice/warmup/result',
+            query: merge(msg, { id: this.props.location.query.id })
+          })
           else dispatch(alertMsg(msg))
         })
       })

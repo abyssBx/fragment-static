@@ -21,16 +21,20 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin()
 	],
-  resolve: {
-    root: path.resolve("./src"),
-    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"],
-  },
+	resolve: {
+		root: path.resolve("./src"),
+		extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"],
+		alias: {
+			'react': 'react-lite',
+			'react-dom': 'react-lite'
+		}
+	},
 	module: {
 		loaders: [
 			{ test: /\.tsx?$/, loaders: ["babel-loader", "ts-loader?transpileOnly=true"], exclude: /node_modules/ },
 			{ test: /\.less$/, loader: "style!css!less" },
 			{ test: /\.css$/, loader: "style!css" },
-      { test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=5000', exclude: /node_modules/ },
+			{ test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=5000', exclude: /node_modules/ },
 		]
 	},
 }
