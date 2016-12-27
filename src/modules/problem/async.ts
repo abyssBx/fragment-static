@@ -1,17 +1,21 @@
 import { pget, ppost } from "utils/request";
 
 export function loadProblemList() {
-	return pget(`/problem/load`)
+  return pget(`/problem/load`)
 }
 
 export function submitProblemList(params) {
-	return ppost(`/problem/select`, params)
+  return ppost(`/problem/select`, params)
 }
 
 export function loadMyProblemList() {
-	return pget(`/problem/load/mine`)
+  return pget(`/problem/load/mine`)
+}
+
+export function loadProblem(id) {
+  return pget(`/problem/get/${id}`)
 }
 
 export function createPlan(problemId) {
-	return ppost(`/plan/choose/problem/${problemId}`)
+  return ppost(`/plan/choose/problem/${problemId}`)
 }

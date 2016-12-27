@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Audio.less";
 import Slider from "react-rangeslider";
-import Icon from "./Icon";
+import AssetImg from "./AssetImg";
 
 let timer;
 
@@ -77,8 +77,8 @@ export default class Audio extends React.Component<any, any> {
       <div className="audio">
         <div className="audio-container">
           { playing ?
-          <div className="audio-btn" onClick={this.pause.bind(this)}><Icon type="sound_active" size={20}/></div> :
-          <div className="audio-btn" onClick={this.start.bind(this)}><Icon type="sound" size={20}/></div>}
+          <div className="audio-btn" onClick={this.pause.bind(this)}><AssetImg type="sound_active" size={20}/></div> :
+          <div className="audio-btn" onClick={this.start.bind(this)}><AssetImg type="sound" size={20}/></div>}
           <div className="audio-duration">{ intToTime(currentSecond) }/{intToTime(duration)}</div>
           <div className="audio-progress">
             <Slider

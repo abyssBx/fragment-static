@@ -51,4 +51,17 @@ router.get("/problem/load/mine", (req, res) => {
 		}), Math.random() * 1500)
 });
 
+router.get("/problem/get/*", (req, res) => {
+	setTimeout(() =>
+		res.status(200).json({
+			"code": 200,
+			"msg":{
+				"id": 1,
+				"problem":"问题描述", //问题
+				"pic":"http://www.iquanwai.com/images/cintro1.png", //问题头图
+				"description":"问题详情" //html
+			}
+		}), Math.random() * 1500)
+});
+
 module.exports = router;

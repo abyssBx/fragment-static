@@ -1,64 +1,57 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./ProblemReport.less";
-import { loadMyProblemList } from "./async";
+import { loadProblem } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 
 @connect(state => state)
 export class ProblemReport extends React.Component <any, any> {
-	constructor() {
-		super()
-		this.state = {}
-	}
+  constructor() {
+    super()
+    this.state = {}
+  }
 
-	static contextTypes = {
-		router: React.PropTypes.object.isRequired
-	}
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
 
-	componentWillMount() {
-		const { dispatch } = this.props
-		dispatch(startLoad())
-		loadMyProblemList().then(res => {
-			dispatch(endLoad())
-			const { code, msg } = res
-			if (code === 200)  this.setState(msg)
-			else dispatch(alertMsg(msg))
-		}).catch(ex => {
-			dispatch(endLoad())
-			dispatch(alertMsg(ex))
-		})
-	}
+  componentWillMount() {
+    const { dispatch } = this.props
+    dispatch(startLoad())
+    loadProblem(this.props.location.query.id).then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
+      if (code === 200)  this.setState(msg)
+      else dispatch(alertMsg(msg))
+    }).catch(ex => {
+      dispatch(endLoad())
+      dispatch(alertMsg(ex))
+    })
+  }
 
-	onSubmit() {
-		const { location } = this.props
-		const { id } = location.query
-		this.context.router.push({ pathname: '/fragment/plan/intro', query: { id } })
-	}
+  onSubmit() {
+    const { location } = this.props
+    const { id } = location.query
+    this.context.router.push({ pathname: '/fragment/plan/intro', query: { id } })
+  }
 
-	render() {
-		const { name, problemList, problemSelected } = this.state
+  render() {
+    const { problem, pic, description } = this.state
 
-		const problemListRender = (list) => {
-			return list.map(item => {
-				return (
-					<div key={item.problemId} onClick={this.onProblemClicked.bind(this, item.problemId)}>
-						<div className={`button-circle${problemSelected === item.problemId ? ' selected' : ''}`}>
-							{item.problem}
-						</div>
-					</div>
-				)
-			})
-		}
-
-		return (
-			<div className="problem-priority">
-				<div className="container has-footer">
-					<div className="info">
-						<p>玩法</p>
-					</div>
-				</div>
-				<div className="button-footer" onClick={this.onSubmit.bind(this)}>下一步</div>
-			</div>
-		)
-	}
+    return (
+      <div>
+        <div className="container has-footer">
+          <div className="problem-report">
+            <div className="context">
+              <div className="context-img">
+                <img src={pic} alt=""/>
+              </div>
+              <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
+            </div>
+          </div>
+        </div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>下一步</div>
+      </div>
+    )
+  }
 }

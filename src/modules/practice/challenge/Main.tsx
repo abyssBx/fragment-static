@@ -1,16 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import "./Intro.less";
-import { loadKnowledgeIntro } from "./async";
+import "./Main.less";
+import { loadChallengePractice } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 
 @connect(state => state)
-export class Intro extends React.Component <any, any> {
+export class Main extends React.Component <any, any> {
   constructor() {
     super()
     this.state = {
-      data: {}
+      data: {},
+      knowledge: {},
     }
   }
 
@@ -21,7 +22,7 @@ export class Intro extends React.Component <any, any> {
   componentWillMount() {
     const { dispatch, location } = this.props
     dispatch(startLoad())
-    loadKnowledgeIntro(location.query.id).then(res => {
+    loadChallengePractice(location.query.id).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200)  this.setState({ data: msg })
@@ -33,28 +34,33 @@ export class Intro extends React.Component <any, any> {
   }
 
   onSubmit() {
-    this.context.router.push({ pathname: '/fragment/practice/warmup', query: this.props.location.query })
+    this.context.router.push({
+      pathname: '/fragment/plan/main',
+    })
   }
 
   render() {
-    const { data } = this.state
-    const { knowledge, voice, pic, analysis } = data
+    const { data, knowledge = {} } = this.state
+    const { voice, pic, description, pcurl } = data
 
     return (
       <div>
         <div className="container has-footer">
-          <div className="warm-up-intro">
-            <div className="page-header">{knowledge}</div>
+          <div className="challenge">
             <div className="intro-container">
               { voice ? <div className="context-audio">
                 <Audio url={voice}/>
               </div> : null }
-              <div className="context" dangerouslySetInnerHTML={{__html: analysis}}>
+              <div className="context" dangerouslySetInnerHTML={{__html: description}}>
+              </div>
+              <div className="pc-homework">
+                <div className="guide">请前往电脑端登陆</div>
+                <div className="url">{pcurl}</div>
               </div>
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>开始游戏</div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>完成</div>
       </div>
     )
   }

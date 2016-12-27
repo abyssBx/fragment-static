@@ -11,6 +11,7 @@ export class PlanIntro extends React.Component <any, any> {
     this.state = {
       length: '',
       endDate: '',
+      pic: ''
     }
   }
 
@@ -37,18 +38,26 @@ export class PlanIntro extends React.Component <any, any> {
   }
 
   render() {
-    const { length, endDate } = this.state
+    const { length, endDate, pic } = this.state
 
     return (
-      <div className="plan-intro">
+      <div>
         <div className="container has-footer">
-          <h4>在接下来{length}天里, 每天你需要完成:</h4>
-          <div className="sub-info"><span className="number">2</span>个知识点的热身训练</div>
-          <div className="sub-info"><span className="number">1</span>个知识点的应用训练</div>
-          <div className="info">
-            <p>欢迎语和介绍语</p>
-            <p>工作和生活中</p>
-            <p>你有那些想要提高的方面呢? (可多选)</p>
+          <div className="plan-intro">
+            <div className="info-title">在接下来{length}天里, 每天你需要完成:</div>
+            <div className="sub-info"><span className="number">2</span>个知识点的热身训练</div>
+            <div className="sub-info"><span className="number">1</span>个知识点的应用训练</div>
+            <div className="sub-info"><span className="number">1</span>个综合的挑战训练</div>
+            <div className="context-img">
+              <img src={pic} alt=""/>
+            </div>
+            <div className="info">
+              <p>每天六点会解锁你新一天的训练任务, 选择你一天中最方便的时间训练, 并形成习惯</p>
+              <p>工作和生活中</p>
+            </div>
+            <div className="info">
+              <p>你有那些想要提高的方面呢? (可多选)</p>
+            </div>
           </div>
         </div>
         <div className="button-footer" onClick={this.onSubmit.bind(this)}>开始</div>

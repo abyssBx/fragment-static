@@ -1,6 +1,6 @@
 @import "../../../style/variable";
 
-.warm-up {
+.warm-up-analysis {
   height: 100%;
   .header {
     width: 100%;
@@ -69,9 +69,15 @@
         &.selected {
           > .index {
             color: white;
-            border-color: @color_theme;
             text-align: center;
-            background-color: @color_theme;
+            &.right {
+              border-color: #4dc6f5;
+              background-color: #4dc6f5;
+            }
+            &.wrong {
+              border-color: #f7a466;
+              background-color: #f7a466;
+            }
           }
           > .text {
             color: white;
@@ -83,6 +89,15 @@
       }
       > .choice + .choice {
         margin-top: 15px;
+      }
+    }
+    > .analysis {
+      margin-top: 25px;
+      border-top: 1px solid #d0d0d0;
+      > .analysis-title {
+        font-size: 13px;
+        color: @color_theme;
+        margin: 10px 0 10px -0.5rem;
       }
     }
   }

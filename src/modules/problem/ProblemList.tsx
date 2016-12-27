@@ -79,15 +79,19 @@ export class ProblemList extends React.Component <any, any> {
     }
 
     return (
-      <div className="problem-list">
+      <div>
         <div className="container has-footer">
-          <div className="info">
-            <p>你好, {name}, 欢迎来到圈外"训练营"</p>
-            <p>欢迎语和介绍语</p>
-            <p>工作和生活中</p>
-            <p>你有那些想要提高的方面呢? (可多选)</p>
+          <div className="problem-list">
+            <div className="info">
+              <p>你好, {name}, 欢迎来到圈外"训练营"</p>
+              <p>欢迎语和介绍语</p>
+              <p>工作和生活中</p>
+              <p>你有那些想要提高的方面呢? (可多选)</p>
+            </div>
+            <div className="list">
+              {problemListRender(problemList)}
+            </div>
           </div>
-          {problemListRender(problemList)}
         </div>
         <div className="button-footer" onClick={this.onSubmit.bind(this)}>选好了</div>
       </div>

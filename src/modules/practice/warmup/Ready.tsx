@@ -44,18 +44,18 @@ export class Ready extends React.Component <any, any> {
         <div className="container">
           <div className="header">{knowledge}</div>
           <div className="intro-container">
-            <div className="picture">
-              <img src="" alt=""/>
+            <div className="context-img">
+              <img src={pic} alt=""/>
             </div>
             <div className="choice-list">
-              <div className="choice"
+              <div className="choice start"
                    onClick={() => this.context.router.push({
                      pathname: '/fragment/practice/warmup',
                      query: this.props.location.query
                    })}>
                 开始游戏
               </div>
-              <div className="choice"
+              <div className="choice review"
                    onClick={() => this.context.router.push({
                      pathname: '/fragment/practice/warmup/intro',
                      query: this.props.location.query

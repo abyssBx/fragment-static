@@ -8,6 +8,14 @@ export function loadWarmUpPractice(series, sequence) {
   return pget(`/practice/warmup/start/${series}/${sequence}`)
 }
 
+export function loadWarmUpAnalysis(series, sequence) {
+  return pget(`/practice/warmup/analysis/${series}/${sequence}`)
+}
+
+export function loadWarmUpNext() {
+  return pget(`/practice/next`)
+}
+
 export function answer(params) {
   return ppost(`/practice/warmup/answer`, params)
 }

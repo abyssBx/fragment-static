@@ -16,7 +16,8 @@ router.get("/plan/play/*", (req, res) => {
 			"code": 200,
 			"msg": {
 				"length": 14, //持续天数
-				"endDate": "12月18日" //结束日期
+				"endDate": "12月18日", //结束日期
+				"pic": "http://www.iquanwai.com/images/cintro1.png" //问题头图
 			}
 		}), Math.random() * 1500)
 });
@@ -24,47 +25,70 @@ router.get("/plan/play/*", (req, res) => {
 router.get("/plan/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
-			"code": 200,
 			"msg": {
-				"complete": 3, //结束的训练
-				"total": 14, //总共的训练
-				"score": 3000, //积分
+				"id": 2,
+				"openid": null,
+				"problemId": 2,
+				"startDate": "2016-12-24",
+				"endDate": "2016-12-31",
+				"closeDate": "2017-01-07",
+				"status": 1,
+				"point": 0,
+				"complete": 0,
+				"total": 22,
+				"keycnt": 2,
 				"problem": {
-					"problem": "问题描述", //问题
-					"pic": "头图" //问题头图
+					"id": 2,
+					"problem": "跟老板/家人提要求时更有说服力",
+					"pic": "http://www.iquanwai.com/images/cintro1.png",
+					"length": 5,
+					"warmupCount": 10,
+					"applicationCount": 5,
+					"challengeCount": 1,
+					"description": "以情动人和以理服人是说服别人的两种方式，通过本训练，你将掌握提出明确的诉求、讲好故事、以及有效使用证据的方法。结合运用理性和感性，更好说服他人。"
 				},
-				"deadline": 11, // 截止时间
-				"length": 14, //持续天数
-				"endDate": "2016-12-18", //结束日期
-				"practice": [
-					{
-						"knowledge": {
-							"id": 1,
-							"knowledge": "知识点描述", //知识点描述
-							"appear": 0, //是否出现过,0-未出现，1-出现过
-						},
-						"type": 1, // 1-热身训练，2-应用训练，3-挑战训练
-						"status": 1, // 0-未完成，1-已完成
-						"unlock": true, //是否解锁
-						"practiceIdList": [1, 2, 3], //训练id
-						"series": 1, //组号
-						"sequence": 1 //组内顺序
-					},
-					{
-						"knowledge": {
-							"id": 1,
-							"knowledge": "知识点描述", //知识点描述
-							"appear": 1, //是否出现过,0-未出现，1-出现过
-						},
-						"type": 2, // 1-热身训练，2-应用训练，3-挑战训练
-						"status": 1, // 0-未完成，1-已完成
-						"unlock": true, //是否解锁
-						"practiceIdList": [1], //训练id
-						"series": 1, //组号
-						"sequence": 2 //组内顺序
-					}
-				]
-			}
+				"practice": [{
+					"knowledge": {
+						"id": 6,
+						"knowledge": "概括主题",
+						"type": 1,
+						"analysis": "当别人在听你讲话时，一般是逐句理解你的意思的。当大量信息扑向受众时，他们会自动从中寻找共同点，将你所表达的思想归类组合进行解读。但受众的知识背景和理解力千差万别，他们很难对你的表达做出和你完全一样的解读。这时你传达的信息既增加了读者的理解难度，又容易造成误解。因此，如果你先提出总结性的思想，再表述具体内容，可以让你的讲话条理清晰，更容易理解。",
+						"pic": null,
+						"voice": null,
+						"appear": true
+					}, "type": 1, "status": 1, "unlocked": true, "practiceIdList": [49, 45, 47], "series": 1, "sequence": 1
+				}, {
+					"knowledge": {
+						"id": 7,
+						"knowledge": "SCQA",
+						"type": 1,
+						"analysis": "SCQA通过讲故事的方式撰写主题、使主题更加鲜明和吸引人。通过SCQA概述你所要解决的问题背景、复杂性、关键问题和解决方案，以故事的形式激发读者兴趣，让他们专注于你的话题和你将要表达的思想。",
+						"pic": null,
+						"voice": null,
+						"appear": true
+					}, "type": 1, "status": 0, "unlocked": true, "practiceIdList": [52, 56, 52], "series": 1, "sequence": 2
+				}, {
+					"knowledge": {
+						"id": 6,
+						"knowledge": "概括主题",
+						"type": 1,
+						"analysis": "当别人在听你讲话时，一般是逐句理解你的意思的。当大量信息扑向受众时，他们会自动从中寻找共同点，将你所表达的思想归类组合进行解读。但受众的知识背景和理解力千差万别，他们很难对你的表达做出和你完全一样的解读。这时你传达的信息既增加了读者的理解难度，又容易造成误解。因此，如果你先提出总结性的思想，再表述具体内容，可以让你的讲话条理清晰，更容易理解。",
+						"pic": null,
+						"voice": null,
+						"appear": true
+					}, "type": 11, "status": 0, "unlocked": true, "practiceIdList": [27], "series": 1, "sequence": 3
+				}, {
+					"knowledge": null,
+					"type": 21,
+					"status": 0,
+					"unlocked": true,
+					"practiceIdList": [2],
+					"series": 0,
+					"sequence": 4
+				}],
+				"length": 7,
+				"deadline": 11
+			}, "code": 200
 		}), Math.random() * 1500)
 });
 
@@ -76,8 +100,8 @@ router.get("/plan/knowledge/load/*", (req, res) => {
 				"id": 1,
 				"knowledge": "知识点描述", //知识点
 				"voice": "http://someurl", //语音链接
-				"pic": "http://someurl", //图片链接
-				"analysis": "balbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbal" //文字解析
+				"pic": "http://www.iquanwai.com/images/cintro1.png", //图片链接
+				"analysis": "<div class='context-img'><img  src='http://www.iquanwai.com/images/cintro1.png' alt=''></div><p>balbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbal</p>" //文字解析
 			}
 		}), Math.random() * 1500)
 });

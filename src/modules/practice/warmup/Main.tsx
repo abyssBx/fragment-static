@@ -7,10 +7,10 @@ import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 
 const sequenceMap = {
-  0: 'A.',
-  1: 'B.',
-  2: 'C.',
-  3: 'D.',
+  0: 'A',
+  1: 'B',
+  2: 'C',
+  3: 'D',
 }
 
 @connect(state => state)
@@ -109,14 +109,19 @@ export class Main extends React.Component <any, any> {
   }
 
   render() {
-    const { list, currentIndex, selected, knowledge } = this.state
+    const { list, currentIndex, selected, knowledge, practiceCount } = this.state
     const { practice = [] } = list
 
     const questionRender = (practice) => {
       const { question, voice, analysis, choiceList = [] } = practice
       return (
         <div className="intro-container">
-          { voice ? <div className="audio">
+          { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
+            <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
+            {practice.type === 1 ? <span className="type">(单选题)</span> : null }
+            {practice.type === 2 ? <span className="type">(多选题)</span> : null }
+          </div> : null}
+          { voice ? <div className="context-audio">
             <Audio url={voice}/>
           </div> : null }
           <div className="question">
@@ -134,18 +139,21 @@ export class Main extends React.Component <any, any> {
       return (
         <div key={id} className={`choice${selected.indexOf(id) > -1 ? ' selected' : ''}`}
              onClick={e => this.onChoiceSelected(id)}>
-          {sequenceMap[idx]}{subject}
+          <span className="index">{sequenceMap[idx]}</span>
+          <span className="text">{subject}</span>
         </div>
       )
     }
 
     return (
-      <div className="warm-up">
-        <div className="container has-footer">
-          <div className="header">{knowledge.knowledge}</div>
-          <div key={practice.id}>{questionRender(practice[currentIndex] || {})}</div>
+      <div>
+        <div className="container" style={{height: window.innerHeight - 75}}>
+          <div className="warm-up">
+            <div className="page-header">{knowledge.knowledge}</div>
+            {questionRender(practice[currentIndex] || {})}
+          </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>提交答案</div>
+        <div className="button-submit" onClick={this.onSubmit.bind(this)}>提交</div>
       </div>
     )
   }

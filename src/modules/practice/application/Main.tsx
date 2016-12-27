@@ -1,15 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import "./Result.less";
-import { loadKnowledgeIntro, loadWarmUpNext } from "./async";
+import "./Main.less";
+import { loadKnowledgeIntro, loadApplicationPractice, loadWarmUpNext } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
+import Audio from "../../../components/Audio";
 
 @connect(state => state)
-export class Result extends React.Component <any, any> {
+export class Main extends React.Component <any, any> {
   constructor() {
     super()
     this.state = {
-      data: {}
+      data: {},
+      knowledge: {},
     }
   }
 
@@ -23,6 +25,15 @@ export class Result extends React.Component <any, any> {
     loadKnowledgeIntro(location.query.id).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
+      if (code === 200)  this.setState({ knowledge: msg })
+      else dispatch(alertMsg(msg))
+    }).catch(ex => {
+      dispatch(endLoad())
+      dispatch(alertMsg(ex))
+    })
+    loadApplicationPractice(location.query.appId).then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
       if (code === 200)  this.setState({ data: msg })
       else dispatch(alertMsg(msg))
     }).catch(ex => {
@@ -32,10 +43,6 @@ export class Result extends React.Component <any, any> {
   }
 
   onSubmit() {
-    this.context.router.push({ pathname: '/fragment/practice/warmup/analysis', query: this.props.location.query })
-  }
-
-  nextTask() {
     const { dispatch } = this.props
     dispatch(startLoad())
     loadWarmUpNext().then(res => {
@@ -71,7 +78,7 @@ export class Result extends React.Component <any, any> {
         } else if (type === 21) {
           this.context.router.push({
             pathname: '/fragment/practice/challenge',
-            query: { id: item.practiceIdList[0] }
+            query: { chaId: item.practiceIdList[0], id: knowledge.id }
           })
         }
       }
@@ -79,38 +86,24 @@ export class Result extends React.Component <any, any> {
   }
 
   render() {
-    const { rightNumber, point } = this.props.location.query
-    const { data } = this.state
-    const { knowledge, voice, pic, analysis } = data
+    const { data, knowledge = {} } = this.state
+    const { voice, pic, description } = data
 
     return (
       <div>
         <div className="container has-footer">
-          <div className="warm-up-result">
-            <div className="page-header">{knowledge}</div>
+          <div className="application">
+            <div className="page-header">{knowledge.knowledge}</div>
             <div className="intro-container">
-              <div className="context-img">
-                <img src="http://www.iquanwai.com/images/cintro1.png" alt=""/>
-              </div>
-              <div className="section">
-                <div className="section-title">答对题数</div>
-                <div className="count-circle">
-                  <span className="count-main">{rightNumber}</span><span className="count-sub">/ 3</span>
-                </div>
-              </div>
-              <div className="section">
-                <div className="section-title">任务得分</div>
-                <div className="count">
-                  <span className="count-main">{point}</span><span className="count-sub">分</span>
-                </div>
+              { voice ? <div className="context-audio">
+                <Audio url={voice}/>
+              </div> : null }
+              <div className="context" dangerouslySetInnerHTML={{__html: description}}>
               </div>
             </div>
           </div>
         </div>
-        <div className="button-footer">
-          <div className="left" onClick={this.onSubmit.bind(this)}>知识回顾</div>
-          <div className="right" onClick={this.nextTask.bind(this)}>下一任务</div>
-        </div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>下一任务</div>
       </div>
     )
   }
