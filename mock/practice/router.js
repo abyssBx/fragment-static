@@ -197,19 +197,17 @@ router.get("/practice/next", (req, res) => {
 		res.status(200).json({
 			"code": 200,
 			"msg": {
-				"practice": {
-					"knowledge": {
-						"Id": 1,
-						"knowledge": "知识点描述", //知识点描述
-						"appear": 0, //是否出现过,0-未出现，1-出现过
-					},
-					"type": 21, // 1-单选题，2-多选题，11-应用题，21-挑战题
-					"status": 1, // 0-未完成，1-已完成
-					"unlocked": true, //是否解锁
-					"practiceIdList": [1, 2, 3], //训练id
-					"series": 1, //组号
-					"sequence": 1 //组内顺序
-				}
+				"knowledge": {
+					"Id": 1,
+					"knowledge": "知识点描述", //知识点描述
+					"appear": 0, //是否出现过,0-未出现，1-出现过
+				},
+				"type": 21, // 1-单选题，2-多选题，11-应用题，21-挑战题
+				"status": 1, // 0-未完成，1-已完成
+				"unlocked": true, //是否解锁
+				"practiceIdList": [1, 2, 3], //训练id
+				"series": 1, //组号
+				"sequence": 1 //组内顺序
 			}
 		}), Math.random() * 1500)
 });

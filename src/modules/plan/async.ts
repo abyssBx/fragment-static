@@ -11,3 +11,7 @@ export function loadPlanIntro(planId) {
 export function submitProblemList(params) {
   return ppost(`/problem/select`, params)
 }
+
+export function loadWarmUpNext() {
+  return pget(`/practice/next`)
+}

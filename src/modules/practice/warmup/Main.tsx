@@ -100,7 +100,7 @@ export class Main extends React.Component <any, any> {
           const { code, msg } = res
           if (code === 200)  this.context.router.push({
             pathname: '/fragment/practice/warmup/result',
-            query: merge(msg, { id: this.props.location.query.id })
+            query: merge(msg, this.props.location.query)
           })
           else dispatch(alertMsg(msg))
         })

@@ -42,8 +42,12 @@ export class Result extends React.Component <any, any> {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
-        const item = msg.practice
-        const { type, series, sequence, knowledge } = item
+        const item = msg
+        const { type, series, sequence, knowledge, unlocked } = item
+        if (!unlocked) {
+          dispatch(alertMsg("该训练尚未解锁"))
+          return
+        }
         if (type === 1 || type === 2) {
           if (item.status === 1) {
             this.context.router.push({
@@ -74,6 +78,8 @@ export class Result extends React.Component <any, any> {
             query: { id: item.practiceIdList[0] }
           })
         }
+      } else {
+        dispatch(alertMsg(msg))
       }
     })
   }

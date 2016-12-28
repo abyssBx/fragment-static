@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./PlanMain.less";
-import { loadPlan } from "./async";
+import { loadPlan, loadWarmUpNext } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 import AssetImg from "../../components/AssetImg";
 
@@ -51,6 +51,7 @@ export class PlanMain extends React.Component <any, any> {
   }
 
   onPracticeSelected(item) {
+    const { dispatch } = this.props
     const { type, series, sequence, knowledge, unlocked } = item
     if (!unlocked) {
       dispatch(alertMsg("该训练尚未解锁"))
@@ -89,8 +90,18 @@ export class PlanMain extends React.Component <any, any> {
     }
   }
 
-  onSubmit() {
-    this.context.router.push({ pathname: '/fragment/plan/main' })
+  nextTask() {
+    const { dispatch } = this.props
+    dispatch(startLoad())
+    loadWarmUpNext().then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
+      if (code === 200) {
+        this.onPracticeSelected(msg)
+      } else {
+        dispatch(alertMsg(msg))
+      }
+    })
   }
 
   render() {
@@ -169,7 +180,7 @@ export class PlanMain extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>开始</div>
+        <div className="button-footer" onClick={this.nextTask.bind(this)}>开始</div>
       </div>
     )
   }
