@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./ProblemReport.less";
-import { loadProblem } from "./async";
+import { loadProblem, createPlan } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 
 @connect(state => state)
@@ -30,9 +30,17 @@ export class ProblemReport extends React.Component <any, any> {
   }
 
   onSubmit() {
-    const { location } = this.props
-    const { id } = location.query
-    this.context.router.push({ pathname: '/fragment/plan/intro', query: { id } })
+    const { dispatch } = this.props
+    dispatch(startLoad())
+    createPlan(this.props.location.query.id).then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
+      if (code === 200)  this.context.router.push({ pathname: '/fragment/plan/intro', query: { id: msg } })
+      else dispatch(alertMsg(msg))
+    }).catch(ex => {
+      dispatch(endLoad())
+      dispatch(alertMsg(ex))
+    })
   }
 
   render() {

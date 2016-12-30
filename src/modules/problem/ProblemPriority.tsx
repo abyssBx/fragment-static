@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./ProblemPriority.less";
-import { loadMyProblemList, createPlan } from "./async";
+import { loadMyProblemList } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 
 @connect(state => state)
@@ -36,19 +36,11 @@ export class ProblemPriority extends React.Component <any, any> {
     this.setState({ problemSelected })
   }
 
+
   onSubmit() {
-    const { dispatch } = this.props
-    const { problemSelected } = this.state
-    dispatch(startLoad())
-    createPlan(problemSelected).then(res => {
-      dispatch(endLoad())
-      const { code, msg } = res
-      if (code === 200)  this.context.router.push({ pathname: '/fragment/problem/report', query: { id: msg } })
-      else dispatch(alertMsg(msg))
-    }).catch(ex => {
-      dispatch(endLoad())
-      dispatch(alertMsg(ex))
-    })
+    const { location } = this.props
+    const { id } = location.query
+    this.context.router.push({ pathname: '/fragment/problem/report', query: { id: this.state.problemSelected } })
   }
 
   render() {
