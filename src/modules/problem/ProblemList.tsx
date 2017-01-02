@@ -83,10 +83,10 @@ export class ProblemList extends React.Component <any, any> {
         <div className="container has-footer">
           <div className="problem-list">
             <div className="info">
-              <p>你好, {name}, 欢迎来到圈外"训练营"</p>
-              <p>欢迎语和介绍语</p>
-              <p>工作和生活中</p>
-              <p>你有那些想要提高的方面呢? (可多选)</p>
+              <p>你好, {name}, 我是你的圈外每日提升教练。</p>
+              <p>训练开始前，我想更了解你的情况。</p>
+              <p>在工作和生活中，你希望提高以下哪些能力呢？</p>
+              <p>(可多选)</p>
             </div>
             <div className="list">
               {problemListRender(problemList)}

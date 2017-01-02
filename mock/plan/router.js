@@ -37,6 +37,7 @@ router.get("/plan/load", (req, res) => {
 				"complete": 0,
 				"total": 22,
 				"keycnt": 2,
+				"status": 2,
 				"problem": {
 					"id": 2,
 					"problem": "跟老板/家人提要求时更有说服力",
@@ -65,7 +66,7 @@ router.get("/plan/load", (req, res) => {
 						"analysis": "SCQA通过讲故事的方式撰写主题、使主题更加鲜明和吸引人。通过SCQA概述你所要解决的问题背景、复杂性、关键问题和解决方案，以故事的形式激发读者兴趣，让他们专注于你的话题和你将要表达的思想。",
 						"pic": null,
 						"voice": null,
-						"appear": true
+						"appear": false
 					}, "type": 1, "status": 0, "unlocked": true, "practiceIdList": [52, 56, 52], "series": 1, "sequence": 2
 				}, {
 					"knowledge": {
@@ -100,8 +101,10 @@ router.get("/plan/knowledge/load/*", (req, res) => {
 				"id": 1,
 				"knowledge": "知识点描述", //知识点
 				"voice": "http://someurl", //语音链接
-				"pic": "http://www.iquanwai.com/images/cintro1.png", //图片链接
-				"analysis": "<div class='context-img'><img  src='http://www.iquanwai.com/images/cintro1.png' alt=''></div><p>balbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbalbal</p>" //文字解析
+				"pic": "http://someurl", //图片链接
+				"analysis": "balbalbal", //作用
+				"means": "方法", //方法
+				"keynote": "要点" //要点
 			}
 		}), Math.random() * 1500)
 });

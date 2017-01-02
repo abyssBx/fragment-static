@@ -63,8 +63,7 @@ export class ProblemPriority extends React.Component <any, any> {
         <div className="container has-footer">
           <div className="problem-priority">
             <div className="info">
-              <p>以下这些问题中</p>
-              <p>你第一个想解决的问题是?</p>
+              <p>很好，接下来思考一下优先级，你第一个想要解决的是？</p>
             </div>
             <div className="list">
               {problemListRender(problemList)}

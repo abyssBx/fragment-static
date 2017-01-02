@@ -57,18 +57,19 @@ export class Main extends React.Component <any, any> {
   onChoiceSelected(choiceId) {
     const { list, currentIndex, selected } = this.state
     const curPractice = list.practice[currentIndex]
-    if (curPractice.type === 1) {
-      // 单选
-      this.setState({ selected: [choiceId] })
-    } else if (curPractice.type === 2) {
-      let _list = selected
-      if (_list.indexOf(choiceId) > -1) {
-        remove(_list, n => n === choiceId)
-      } else {
-        _list.push(choiceId)
-      }
-      this.setState({ selected: _list })
+    // 暂时没有单选了
+    // if (curPractice.type === 1) {
+    //   // 单选
+    //   this.setState({ selected: [choiceId] })
+    // } else if (curPractice.type === 2) {
+    let _list = selected
+    if (_list.indexOf(choiceId) > -1) {
+      remove(_list, n => n === choiceId)
+    } else {
+      _list.push(choiceId)
     }
+    this.setState({ selected: _list })
+    // }
   }
 
   setChoice(cb) {
@@ -113,13 +114,12 @@ export class Main extends React.Component <any, any> {
     const { practice = [] } = list
 
     const questionRender = (practice) => {
-      const { question, voice, analysis, choiceList = [] } = practice
+      const { question, voice, analysis, choiceList = [], score = 0 } = practice
       return (
         <div className="intro-container">
           { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
             <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
-            {practice.type === 1 ? <span className="type">(单选题)</span> : null }
-            {practice.type === 2 ? <span className="type">(多选题)</span> : null }
+            <span className="type">{score}分</span>
           </div> : null}
           { voice ? <div className="context-audio">
             <Audio url={voice}/>

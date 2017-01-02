@@ -106,7 +106,7 @@ export class PlanMain extends React.Component <any, any> {
 
   render() {
     const { planData } = this.state
-    const { problem = {}, practice, complete, point, total, deadline } = planData
+    const { problem = {}, practice, complete, point, total, deadline, status } = planData
 
     const practiceRender = (list = []) => {
       return list.map((item, index) => {
@@ -133,7 +133,7 @@ export class PlanMain extends React.Component <any, any> {
 
     return (
       <div>
-        { false ?
+        { status === 2 ?
           <div className="mask">
             <div className="finished_modal">
               <AssetImg width={290} height={410} type="finish_modal"/>
@@ -150,11 +150,33 @@ export class PlanMain extends React.Component <any, any> {
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
                 <div className="button">分享一下</div>
-                <div className="button">再来一个</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/list")}>再来一个</div>
               </div>
             </div>
             <div className="ended_modal">
 
+            </div>
+          </div>
+          : null }
+        { status === 3 ?
+          <div className="mask">
+            <div className="finished_modal">
+              <AssetImg width={290} height={410} type="expire_modal"/>
+              <div className="modal_context">
+                <div className="title">
+                  你的"{problem.problem}"已经到期了! <br/>
+                  这个过程中, 你共完成了:
+                </div>
+                <div className="content">
+                  <span className="number">{complete}</span><span className="text">个热身训练</span>
+                </div>
+                <div className="sub-title">获得了</div>
+                <div className="content2">
+                  <span className="number">{point}</span><span className="text">积分</span>
+                </div>
+                <div className="button">分享一下</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/list")}>再来一个</div>
+              </div>
             </div>
           </div>
           : null }

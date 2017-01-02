@@ -4,6 +4,7 @@ import "./Intro.less";
 import { loadKnowledgeIntro } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
+import AssetImg from "../../../components/AssetImg";
 
 @connect(state => state)
 export class Intro extends React.Component <any, any> {
@@ -38,7 +39,7 @@ export class Intro extends React.Component <any, any> {
 
   render() {
     const { data } = this.state
-    const { knowledge, voice, pic, analysis } = data
+    const { knowledge, voice, pic, analysis, means, keynotes } = data
 
     return (
       <div>
@@ -49,7 +50,20 @@ export class Intro extends React.Component <any, any> {
               { voice ? <div className="context-audio">
                 <Audio url={voice}/>
               </div> : null }
+              <div className="context-title-img">
+                <AssetImg width={48} height={18} type="analysis"/>
+              </div>
               <div className="context" dangerouslySetInnerHTML={{__html: analysis}}>
+              </div>
+              <div className="context-title-img">
+                <AssetImg width={50} height={16} type="means"/>
+              </div>
+              <div className="context" dangerouslySetInnerHTML={{__html: means}}>
+              </div>
+              <div className="context-title-img">
+                <AssetImg width={50} height={18} type="keynotes"/>
+              </div>
+              <div className="context" dangerouslySetInnerHTML={{__html: keynotes}}>
               </div>
             </div>
           </div>
