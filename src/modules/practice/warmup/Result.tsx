@@ -114,7 +114,7 @@ export class Result extends React.Component <any, any> {
           </div>
         </div>
         <div className="button-footer">
-          <div className="left" onClick={this.onSubmit.bind(this)}>知识回顾</div>
+          <div className="left" onClick={this.onSubmit.bind(this)}>答题解析</div>
           <div className="right" onClick={this.nextTask.bind(this)}>下一任务</div>
         </div>
       </div>

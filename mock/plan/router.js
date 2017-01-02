@@ -32,7 +32,7 @@ router.get("/plan/load", (req, res) => {
 				"startDate": "2016-12-24",
 				"endDate": "2016-12-31",
 				"closeDate": "2017-01-07",
-				"currentSeries":2, //当前题组
+				"currentSeries": 2, //当前题组
 				"totalSeries": 7,  //总题组
 				"point": 0,
 				"complete": 0,
@@ -67,7 +67,7 @@ router.get("/plan/load", (req, res) => {
 						"analysis": "SCQA通过讲故事的方式撰写主题、使主题更加鲜明和吸引人。通过SCQA概述你所要解决的问题背景、复杂性、关键问题和解决方案，以故事的形式激发读者兴趣，让他们专注于你的话题和你将要表达的思想。",
 						"pic": null,
 						"voice": null,
-						"appear": false
+						"appear": true
 					}, "type": 1, "status": 0, "unlocked": true, "practiceIdList": [52, 56, 52], "series": 1, "sequence": 2
 				}, {
 					"knowledge": {

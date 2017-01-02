@@ -150,7 +150,7 @@ export class PlanMain extends React.Component <any, any> {
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
                 <div className="button">分享一下</div>
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/list")}>再来一个</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个</div>
               </div>
             </div>
             <div className="ended_modal">
@@ -175,7 +175,7 @@ export class PlanMain extends React.Component <any, any> {
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
                 <div className="button">分享一下</div>
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/list")}>再来一个</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个</div>
               </div>
             </div>
           </div>
@@ -185,13 +185,13 @@ export class PlanMain extends React.Component <any, any> {
           <div className="plan-guide">
             <div className="section-title">{problem.problem}</div>
             <div className="section">
-              当前任务: {currentSeries}/{totalSeries}
+              进度: {currentSeries}/{totalSeries}
             </div>
             <div className="section">
-              距离死线: {deadline}
+              开放: {deadline}天
             </div>
             <div className="section">
-              {point} 分
+              得分: {point} 分
             </div>
           </div>
         </div>

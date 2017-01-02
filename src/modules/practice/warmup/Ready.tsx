@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./Ready.less";
 import { loadKnowledgeIntro } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
+import AssetImg from "../../../components/AssetImg";
 
 @connect(state => state)
 export class Ready extends React.Component <any, any> {
@@ -45,7 +46,8 @@ export class Ready extends React.Component <any, any> {
           <div className="header">{knowledge}</div>
           <div className="intro-container">
             <div className="context-img">
-              <img src={pic} alt=""/>
+              <AssetImg type="p9" width={'100%'}/>
+              <div className="tips"><AssetImg type="hoshi" width={9} height={11}/><span>共三道不定项选择题, 做完后统一看解析</span></div>
             </div>
             <div className="choice-list">
               <div className="choice start"

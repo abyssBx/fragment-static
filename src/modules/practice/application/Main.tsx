@@ -4,6 +4,7 @@ import "./Main.less";
 import { loadKnowledgeIntro, loadApplicationPractice, loadWarmUpNext } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
+import AssetImg from "../../../components/AssetImg";
 
 @connect(state => state)
 export class Main extends React.Component <any, any> {
@@ -99,12 +100,32 @@ export class Main extends React.Component <any, any> {
       <div>
         <div className="container has-footer">
           <div className="application">
+            <div className="context-img">
+
+            </div>
             <div className="page-header">{knowledge.knowledge}</div>
             <div className="intro-container">
               { voice ? <div className="context-audio">
                 <Audio url={voice}/>
               </div> : null }
-              <div className="context" dangerouslySetInnerHTML={{__html: description}}>
+              <div className="context-img">
+                <img src="" alt=""/>
+              </div>
+              <div className="application-context">
+                <div className="section1">
+                  <p>好了，今天的知识点学完了，学以致用一下吧！输入是为了更好地输出！</p>
+                </div>
+                <div className="application-title">
+                  <AssetImg type="app" size={15}/><span>今日应用</span>
+                </div>
+                <div className="section2">
+                  <p>
+                    多啦A梦是儿时的回忆。你长大了，那个小蓝胖子也长大了。
+                  </p>
+                  <p>
+                    现在，请你用5W1H策划一个方案，来帮助多啦A梦找个女朋友吧！分享给你的童年好友，看看你的选择和Ta心中的是否一致？
+                  </p>
+                </div>
               </div>
             </div>
           </div>

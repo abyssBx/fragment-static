@@ -5,5 +5,45 @@
   .intro-container {
     height: ~"calc(100% - 49px)";
     overflow: auto;
+    .application-context {
+      color: @color_context;
+      .section1 {
+        font-size: 12px;
+        line-height: 22px;
+      }
+      .section2 {
+        font-size: 13px;
+        line-height: 24px;
+      }
+    }
+    .application-title {
+      text-align: center;
+      margin: 18px 0;
+      > * {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      > span {
+        font-size: 16px;
+        color: #999999;
+        margin-left: 4px;
+      }
+      &::before {
+        content: " ";
+        position: absolute;
+        left: 15px;
+        margin-top: 12px;
+        width: ~"calc(50% - 70px)";
+        border-bottom: 1px solid #cccccc;
+      }
+      &::after {
+        content: " ";
+        position: absolute;
+        right: 15px;
+        margin-top: 12px;
+        width: ~"calc(50% - 70px)";
+        border-bottom: 1px solid #cccccc;
+      }
+    }
   }
 }
