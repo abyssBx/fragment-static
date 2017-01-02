@@ -136,7 +136,7 @@ export class PlanMain extends React.Component <any, any> {
         { status === 2 ?
           <div className="mask">
             <div className="finished_modal">
-              <AssetImg width={290} height={410} type="finish_modal"/>
+              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal.png"/>
               <div className="modal_context">
                 <div className="title">
                   你的"{problem.problem}"已经完成了! <br/>
@@ -150,7 +150,8 @@ export class PlanMain extends React.Component <any, any> {
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
                 <div className="button">分享一下</div>
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
+                </div>
               </div>
             </div>
             <div className="ended_modal">
@@ -161,7 +162,7 @@ export class PlanMain extends React.Component <any, any> {
         { status === 3 ?
           <div className="mask">
             <div className="finished_modal">
-              <AssetImg width={290} height={410} type="expire_modal"/>
+              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/expire_modal.png"/>
               <div className="modal_context">
                 <div className="title">
                   你的"{problem.problem}"已经到期了! <br/>
@@ -175,7 +176,8 @@ export class PlanMain extends React.Component <any, any> {
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
                 <div className="button">分享一下</div>
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个</div>
+                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
+                </div>
               </div>
             </div>
           </div>

@@ -26,7 +26,13 @@ export class ProblemList extends React.Component <any, any> {
     loadProblemList().then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState(msg)
+      if (code === 200) {
+        if (!msg.problemList.length && msg.problemList.length === 0) {
+          this.context.router.push({ pathname: '/fragment/problem/priority' })
+        } else {
+          this.setState(msg)
+        }
+      }
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
@@ -82,12 +88,12 @@ export class ProblemList extends React.Component <any, any> {
       <div>
         <div className="container has-footer">
           <div className="problem-list">
-            <div className="info">
+            { problemList && problemList.length > 0 ? <div className="info">
               <p>你好, {name}, 我是你的圈外每日提升教练。</p>
               <p>训练开始前，我想更了解你的情况。</p>
               <p>在工作和生活中，你希望提高以下哪些能力呢？</p>
               <p>(可多选)</p>
-            </div>
+            </div> : null }
             <div className="list">
               {problemListRender(problemList)}
             </div>

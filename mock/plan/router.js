@@ -38,10 +38,10 @@ router.get("/plan/load", (req, res) => {
 				"complete": 0,
 				"total": 22,
 				"keycnt": 2,
-				"status": 1,
+				"status": 2,
 				"problem": {
 					"id": 2,
-					"problem": "跟老板/家人提要求时更有说服力",
+					"problem": "跟老板",
 					"pic": "http://www.iquanwai.com/images/problem1.png",
 					"length": 5,
 					"warmupCount": 10,

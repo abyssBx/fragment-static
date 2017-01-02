@@ -24,7 +24,13 @@ export class ProblemPriority extends React.Component <any, any> {
     loadMyProblemList().then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState(msg)
+      if (code === 200) {
+        if (!msg.problemList.length || msg.problemList.length === 0) {
+          this.context.router.push({ pathname: '/fragment/problem/list' })
+        } else {
+          this.setState(msg)
+        }
+      }
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
@@ -62,9 +68,9 @@ export class ProblemPriority extends React.Component <any, any> {
       <div>
         <div className="container has-footer">
           <div className="problem-priority">
-            <div className="info">
+            { problemList && problemList.length > 0 ? <div className="info">
               <p>很好，接下来思考一下优先级，你第一个想要解决的是？</p>
-            </div>
+            </div> : null }
             <div className="list">
               {problemListRender(problemList)}
             </div>

@@ -7,7 +7,7 @@ export default class AssetImg extends React.Component<any, any> {
   }
 
   render() {
-    const { size, type, width, height, marginTop, style } = this.props
+    const { size, type, url, width, height, marginTop, style } = this.props
 
     const _style = {
       width: size || width,
@@ -16,7 +16,7 @@ export default class AssetImg extends React.Component<any, any> {
     }
 
     return (
-      <img src={require(`../../assets/img/${type}.png`)} style={merge(_style, style)}/>
+      <img src={type ? require(`../../assets/img/${type}.png`) : url} style={merge(_style, style)}/>
     )
   }
 }
