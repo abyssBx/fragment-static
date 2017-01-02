@@ -130,7 +130,7 @@ export class Main extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>下一任务</div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>继续训练</div>
       </div>
     )
   }

@@ -177,7 +177,7 @@ export class Analysis extends React.Component <any, any> {
           <div className={`left ${currentIndex === 0 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一题</div>
           {currentIndex + 1 < practiceCount ?
           <div className={`right`} onClick={this.next.bind(this)}>下一题</div> :
-          <div className="right" onClick={this.nextTask.bind(this)}>下一任务</div>}
+          <div className="right" onClick={this.nextTask.bind(this)}>继续训练</div>}
         </div>
       </div>
     )
