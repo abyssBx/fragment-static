@@ -32,16 +32,17 @@ router.get("/plan/load", (req, res) => {
 				"startDate": "2016-12-24",
 				"endDate": "2016-12-31",
 				"closeDate": "2017-01-07",
-				"status": 1,
+				"currentSeries":2, //当前题组
+				"totalSeries": 7,  //总题组
 				"point": 0,
 				"complete": 0,
 				"total": 22,
 				"keycnt": 2,
-				"status": 2,
+				"status": 1,
 				"problem": {
 					"id": 2,
 					"problem": "跟老板/家人提要求时更有说服力",
-					"pic": "http://www.iquanwai.com/images/cintro1.png",
+					"pic": "http://www.iquanwai.com/images/problem1.png",
 					"length": 5,
 					"warmupCount": 10,
 					"applicationCount": 5,

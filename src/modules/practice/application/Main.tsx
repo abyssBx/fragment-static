@@ -82,7 +82,7 @@ export class Main extends React.Component <any, any> {
         } else if (type === 21) {
           this.context.router.push({
             pathname: '/fragment/practice/challenge',
-            query: { chaId: item.practiceIdList[0], id: knowledge.id }
+            query: { id: item.practiceIdList[0] }
           })
         }
       } else {

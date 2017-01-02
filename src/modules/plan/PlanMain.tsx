@@ -106,7 +106,7 @@ export class PlanMain extends React.Component <any, any> {
 
   render() {
     const { planData } = this.state
-    const { problem = {}, practice, complete, point, total, deadline, status } = planData
+    const { problem = {}, practice, complete, point, total, deadline, status, currentSeries, totalSeries } = planData
 
     const practiceRender = (list = []) => {
       return list.map((item, index) => {
@@ -182,9 +182,10 @@ export class PlanMain extends React.Component <any, any> {
           : null }
         <div className="header-img">
           <img src={problem.pic} style={{width: this.picWidth, height: this.picHeight}}/>
-          <div className="plan-guide" style={{top: this.picHeight - 25}}>
+          <div className="plan-guide">
+            <div className="section-title">{problem.problem}</div>
             <div className="section">
-              当前任务: {complete}/{total}
+              当前任务: {currentSeries}/{totalSeries}
             </div>
             <div className="section">
               距离死线: {deadline}

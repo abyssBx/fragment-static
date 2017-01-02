@@ -39,7 +39,7 @@ export class Intro extends React.Component <any, any> {
 
   render() {
     const { data } = this.state
-    const { knowledge, voice, pic, analysis, means, keynotes } = data
+    const { knowledge, voice, pic, analysis, means, keynote } = data
 
     return (
       <div>
@@ -63,7 +63,7 @@ export class Intro extends React.Component <any, any> {
               <div className="context-title-img">
                 <AssetImg width={50} height={18} type="keynotes"/>
               </div>
-              <div className="context" dangerouslySetInnerHTML={{__html: keynotes}}>
+              <div className="context" dangerouslySetInnerHTML={{__html: keynote}}>
               </div>
             </div>
           </div>
