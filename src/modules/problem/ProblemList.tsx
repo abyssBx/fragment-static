@@ -28,7 +28,8 @@ export class ProblemList extends React.Component <any, any> {
       const { code, msg } = res
       if (code === 200) {
         if (!msg.problemList.length && msg.problemList.length === 0) {
-          this.context.router.push({ pathname: '/fragment/problem/priority' })
+          // this.context.router.push({ pathname: '/fragment/problem/priority' })
+          dispatch(alertMsg('问题列表为空, 请联系管理员'))
         } else {
           this.setState(msg)
         }
