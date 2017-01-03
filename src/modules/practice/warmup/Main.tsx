@@ -121,7 +121,7 @@ export class Main extends React.Component <any, any> {
         <div className="intro-container">
           { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
             <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
-            <span className="type">{score}分</span>
+            <span className="type"><span className="number">{score}</span>分</span>
           </div> : null}
           { voice ? <div className="context-audio">
             <Audio url={voice}/>

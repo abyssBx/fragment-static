@@ -96,7 +96,7 @@ export class Result extends React.Component <any, any> {
             <div className="page-header">{knowledge}</div>
             <div className="intro-container">
               <div className="context-img">
-                <img src="http://www.iquanwai.com/images/cintro1.png" alt=""/>
+                <img src="http://www.iquanwai.com/images/fragment/practice_start.png" alt=""/>
               </div>
               <div className="section">
                 <div className="section-title">答对题数</div>

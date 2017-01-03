@@ -52,7 +52,7 @@ export class PlanIntro extends React.Component <any, any> {
               <img src={pic} alt=""/>
             </div>
             <div className="info">
-              <p>每天6点会解锁你新一天的训练任务, 选择你一天中最方便的时间训练, 并形成习惯。</p>
+              <p>每天早上6点会解锁你新一天的训练任务, 选择你一天中最方便的时间训练, 并形成习惯。</p>
             </div>
             <div className="info">
               <p>{endDate}训练到期后会关闭。请坚持每天来提升自己, 加油!</p>

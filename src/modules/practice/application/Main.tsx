@@ -109,7 +109,7 @@ export class Main extends React.Component <any, any> {
                 <Audio url={voice}/>
               </div> : null }
               <div className="context-img">
-                <img src="" alt=""/>
+                <img src="http://www.iquanwai.com/images/fragment/application_practice.png" alt=""/>
               </div>
               <div className="application-context">
                 <div className="section1">
