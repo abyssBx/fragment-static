@@ -160,7 +160,7 @@ export class Analysis extends React.Component <any, any> {
             {choice.isRight ? <AssetImg type="right" width={13} height={8}/> :
               ( choice.selected ? <AssetImg type="wrong" size={10}/> : sequenceMap[idx])}
           </span>
-          <span className="text">{subject}</span>
+          <span className={`text${choice.isRight ? ' right' : ' wrong'}`}>{subject}</span>
         </div>
       )
     }
@@ -182,4 +182,4 @@ export class Analysis extends React.Component <any, any> {
       </div>
     )
   }
-}
+  }
