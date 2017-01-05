@@ -34,9 +34,11 @@ router.get("/plan/load", (req, res) => {
 				"closeDate": "2017-01-07",
 				"currentSeries": 2, //当前题组
 				"totalSeries": 7,  //总题组
+				"warmupComplete": 3, //结束的热身训练
+				"applicationComplete": 2, //结束的应用训练
+				"total": 14, //总共的训练
 				"point": 0,
 				"complete": 0,
-				"total": 22,
 				"keycnt": 2,
 				"status": 2,
 				"problem": {
@@ -107,6 +109,14 @@ router.get("/plan/knowledge/load/*", (req, res) => {
 				"means": "方法", //方法
 				"keynote": "要点" //要点
 			}
+		}), Math.random() * 1500)
+});
+
+router.post("/plan/knowledge/learn/*", (req, res) => {
+	setTimeout(() =>
+		res.status(200).json({
+			"code": 200,
+			"msg": "ok"
 		}), Math.random() * 1500)
 });
 

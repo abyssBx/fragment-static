@@ -100,9 +100,6 @@ export class Main extends React.Component <any, any> {
       <div>
         <div className="container has-footer">
           <div className="application">
-            <div className="context-img">
-
-            </div>
             <div className="page-header">{knowledge.knowledge}</div>
             <div className="intro-container">
               { voice ? <div className="context-audio">
@@ -118,13 +115,7 @@ export class Main extends React.Component <any, any> {
                 <div className="application-title">
                   <AssetImg type="app" size={15}/><span>今日应用</span>
                 </div>
-                <div className="section2">
-                  <p>
-                    多啦A梦是儿时的回忆。你长大了，那个小蓝胖子也长大了。
-                  </p>
-                  <p>
-                    现在，请你用5W1H策划一个方案，来帮助多啦A梦找个女朋友吧！分享给你的童年好友，看看你的选择和Ta心中的是否一致？
-                  </p>
+                <div className="section2" dangerouslySetInnerHTML={{__html: description}}>
                 </div>
               </div>
             </div>

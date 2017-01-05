@@ -106,7 +106,7 @@ export class PlanMain extends React.Component <any, any> {
 
   render() {
     const { planData } = this.state
-    const { problem = {}, practice, complete, point, total, deadline, status, currentSeries, totalSeries } = planData
+    const { problem = {}, practice, warmupComplete, applicationComplete, point, total, deadline, status, currentSeries, totalSeries } = planData
 
     const practiceRender = (list = []) => {
       return list.map((item, index) => {
@@ -143,13 +143,16 @@ export class PlanMain extends React.Component <any, any> {
                   这个过程中, 你共完成了:
                 </div>
                 <div className="content">
-                  <span className="number">{complete}</span><span className="text">个热身训练</span>
+                  <span className="number">{warmupComplete}</span><span className="text">个热身训练</span>
+                </div>
+                <div className="content">
+                  <span className="number">{applicationComplete}</span><span className="text">个应用训练</span>
                 </div>
                 <div className="sub-title">获得了</div>
                 <div className="content2">
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
-                <div className="button">分享一下</div>
+                {/**<div className="button">分享一下</div>**/}
                 <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
                 </div>
               </div>
@@ -169,13 +172,16 @@ export class PlanMain extends React.Component <any, any> {
                   这个过程中, 你共完成了:
                 </div>
                 <div className="content">
-                  <span className="number">{complete}</span><span className="text">个热身训练</span>
+                  <span className="number">{warmupComplete}</span><span className="text">个热身训练</span>
+                </div>
+                <div className="content">
+                  <span className="number">{applicationComplete}</span><span className="text">个应用训练</span>
                 </div>
                 <div className="sub-title">获得了</div>
                 <div className="content2">
                   <span className="number">{point}</span><span className="text">积分</span>
                 </div>
-                <div className="button">分享一下</div>
+                {/**<div className="button">分享一下</div>**/}
                 <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
                 </div>
               </div>

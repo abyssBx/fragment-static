@@ -4,6 +4,10 @@ export function loadKnowledgeIntro(knowledgeId) {
   return pget(`/plan/knowledge/load/${knowledgeId}`)
 }
 
+export function learnKnowledge(knowledgeId) {
+  return ppost(`/plan/knowledge/learn/${knowledgeId}`)
+}
+
 export function loadWarmUpPractice(series, sequence) {
   return pget(`/practice/warmup/start/${series}/${sequence}`)
 }

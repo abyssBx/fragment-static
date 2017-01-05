@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./Intro.less";
-import { loadKnowledgeIntro } from "./async";
+import { loadKnowledgeIntro, learnKnowledge } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 import AssetImg from "../../../components/AssetImg";
@@ -25,7 +25,10 @@ export class Intro extends React.Component <any, any> {
     loadKnowledgeIntro(location.query.id).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState({ data: msg })
+      if (code === 200) {
+        this.setState({ data: msg })
+        learnKnowledge(location.query.id)
+      }
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())

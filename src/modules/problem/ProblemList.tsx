@@ -90,7 +90,7 @@ export class ProblemList extends React.Component <any, any> {
         <div className="container has-footer">
           <div className="problem-list">
             { problemList && problemList.length > 0 ? <div className="info">
-              <p>你好, {name}, 我是你的圈外每日提升教练。</p>
+              <p>你好，{name}，我是你的圈外每日提升教练。</p>
               <p>训练开始前，我想更了解你的情况。</p>
               <p>在工作和生活中，你希望提高以下哪些能力呢？</p>
               <p>(可多选)</p>
