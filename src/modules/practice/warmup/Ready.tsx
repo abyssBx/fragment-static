@@ -63,7 +63,7 @@ export class Ready extends React.Component <any, any> {
                      pathname: '/fragment/practice/warmup/intro',
                      query: this.props.location.query
                    })}>
-                知识回顾
+                知识点
               </div>
             </div>
           </div>

@@ -110,7 +110,7 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="application-context">
                 <div className="section1">
-                  <p>好了，今天的知识点学完了，学以致用一下吧！输入是为了更好地输出！</p>
+                  <p>好了，今天的知识点学完了，学以致用一下吧！思考、实践下面的内容，如果有心得或疑问，请在挑战训练的链接中记录下来，将有机会得到圈圈的反馈。</p>
                 </div>
                 <div className="application-title">
                   <AssetImg type="app" size={15}/><span>今日应用</span>

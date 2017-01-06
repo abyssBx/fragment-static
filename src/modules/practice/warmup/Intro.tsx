@@ -71,7 +71,7 @@ export class Intro extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>开始游戏</div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>开始训练</div>
       </div>
     )
   }

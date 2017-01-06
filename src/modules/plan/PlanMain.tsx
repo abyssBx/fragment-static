@@ -124,7 +124,7 @@ export class PlanMain extends React.Component <any, any> {
             </div>
             <div className="footer">
               {item.status === 1 ? <AssetImg type="finished" width={32} height={28} marginTop={(75-28)/2}/> : null}
-              {item.status === 0 ? <AssetImg type="go1" width={27} height={17} marginTop={(75-17)/2}/> : null}
+              {item.status === 0 ? <AssetImg type="go4" width={27} height={17} marginTop={(75-17)/2}/> : null}
             </div>
           </div>
         )
@@ -193,13 +193,13 @@ export class PlanMain extends React.Component <any, any> {
           <div className="plan-guide">
             <div className="section-title">{problem.problem}</div>
             <div className="section">
-              进度: {currentSeries}/{totalSeries}
+              <label>已完成:</label> {currentSeries}/{totalSeries}组训练
             </div>
             <div className="section">
-              开放: {deadline}天
+              <label>距关闭:</label> {deadline}天
             </div>
             <div className="section">
-              得分: {point} 分
+              <label>总得分:</label> {point} 分
             </div>
           </div>
         </div>

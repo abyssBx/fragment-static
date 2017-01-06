@@ -1,34 +1,28 @@
 @import "../../style/variable";
 
 .plan-intro {
-  padding-top: 15px;
-  height: 100%;
-  > .info-title {
+  padding-top: 25px;
+  height: ~"calc(100% - 25px)";
+  > .text {
     font-size: 13px;
     color: @color_context;
-    margin-bottom: 30px;
-  }
-  > .sub-info {
-    font-size: 16px;
-    color: @color_context;
-    > .number {
-      color: @color_theme;
-      font-size: 20px;
-      margin-right: 5px;
-    }
-    & + & {
-      margin-top: 20px;
+    &::before {
+      content: '·';
+      margin-right: 2px;
     }
   }
-  > .info {
-    font-size: 13px;
-    color: @color_context;
-    margin-bottom: 20px;
-    > p {
-      line-height: 24px;
-      & + & {
-        margin-top: 30px;
-      }
-    }
+  > .groups {
+    font-size: 20px;
+    color: #55cbcb;
+    line-height: 40px;
+    margin: 25px 0 35px 0;
+    text-align: center;
+  }
+  > .date {
+    font-size: 20px;
+    color: #55cbcb;
+    line-height: 40px;
+    margin: 25px 0 25px 0;
+    text-align: center;
   }
 }

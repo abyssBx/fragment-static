@@ -51,6 +51,9 @@ export class Main extends React.Component <any, any> {
               { voice ? <div className="context-audio">
                 <Audio url={voice}/>
               </div> : null }
+              <div className="context-img">
+                <img src="http://www.iquanwai.com/images/fragment/challenge_practice.png" alt=""/>
+              </div>
               <div className="context" dangerouslySetInnerHTML={{__html: description}}>
               </div>
               <div className="pc-homework">
@@ -60,7 +63,7 @@ export class Main extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>完成</div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>返回</div>
       </div>
     )
   }

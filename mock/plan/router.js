@@ -40,7 +40,7 @@ router.get("/plan/load", (req, res) => {
 				"point": 0,
 				"complete": 0,
 				"keycnt": 2,
-				"status": 2,
+				"status": 1,
 				"problem": {
 					"id": 2,
 					"problem": "跟老板",
