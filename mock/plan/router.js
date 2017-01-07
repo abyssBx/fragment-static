@@ -41,6 +41,7 @@ router.get("/plan/load", (req, res) => {
 				"complete": 0,
 				"keycnt": 2,
 				"status": 1,
+				"summary": true, //是否显示总结弹窗
 				"problem": {
 					"id": 2,
 					"problem": "跟老板",

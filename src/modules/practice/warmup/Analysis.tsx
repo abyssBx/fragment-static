@@ -25,6 +25,7 @@ export class Analysis extends React.Component <any, any> {
       currentIndex: 0,
       practiceCount: 0,
       knowledge: {},
+      showKnowledge: false,
     }
   }
 
@@ -34,7 +35,7 @@ export class Analysis extends React.Component <any, any> {
 
   componentWillMount() {
     const { dispatch, location } = this.props
-    const { series, sequence } = location.query
+    const { practicePlanId } = location.query
     dispatch(startLoad())
     loadKnowledgeIntro(location.query.id).then(res => {
       dispatch(endLoad())
@@ -45,7 +46,7 @@ export class Analysis extends React.Component <any, any> {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
     })
-    loadWarmUpAnalysis(series, sequence).then(res => {
+    loadWarmUpAnalysis(practicePlanId).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200)  this.setState({ list: msg, practiceCount: msg.practice.length })
@@ -80,7 +81,7 @@ export class Analysis extends React.Component <any, any> {
       const { code, msg } = res
       if (code === 200) {
         const item = msg
-        const { type, series, sequence, knowledge, unlocked } = item
+        const { type, practicePlanId, knowledge, unlocked } = item
         if (!unlocked) {
           dispatch(alertMsg("该训练尚未解锁"))
           return
@@ -89,18 +90,18 @@ export class Analysis extends React.Component <any, any> {
           if (item.status === 1) {
             this.context.router.push({
               pathname: '/fragment/practice/warmup/analysis',
-              query: { series, sequence, id: knowledge.id }
+              query: { practicePlanId, id: knowledge.id }
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/intro',
-                query: { series, sequence, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id }
               })
             } else {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/ready',
-                query: { series, sequence, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id }
               })
             }
           }
@@ -121,9 +122,14 @@ export class Analysis extends React.Component <any, any> {
     })
   }
 
+  closeModal() {
+    this.setState({ showKnowledge: false })
+  }
+
   render() {
-    const { list, currentIndex, selected, knowledge, practiceCount } = this.state
+    const { list, currentIndex, selected, knowledge, practiceCount, showKnowledge } = this.state
     const { practice = [] } = list
+    const { analysis, means, keynote, voice } = knowledge
 
     const questionRender = (practice) => {
       const { question, voice, analysis, choiceList = [] } = practice
@@ -147,6 +153,7 @@ export class Analysis extends React.Component <any, any> {
             <div className="analysis-title">【解析】</div>
             <div className="context"
                  dangerouslySetInnerHTML={{__html: practice ? practice.analysis : ''}}></div>
+            <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
           </div>
         </div>
       )
@@ -179,7 +186,36 @@ export class Analysis extends React.Component <any, any> {
           <div className={`right`} onClick={this.next.bind(this)}>下一题</div> :
           <div className="right" onClick={this.nextTask.bind(this)}>继续训练</div>}
         </div>
+
+        {showKnowledge ? <div className="knowledge-page">
+          <div className="container has-footer">
+            <div className="warm-up-intro">
+              <div className="page-header">{knowledge.knowledge}</div>
+              <div className="intro-container">
+                { voice ? <div className="context-audio">
+                  <Audio url={voice}/>
+                </div> : null }
+                <div className="context-title-img">
+                  <AssetImg width={48} height={18} type="analysis"/>
+                </div>
+                <div className="context" dangerouslySetInnerHTML={{__html: analysis}}>
+                </div>
+                <div className="context-title-img">
+                  <AssetImg width={50} height={16} type="means"/>
+                </div>
+                <div className="context" dangerouslySetInnerHTML={{__html: means}}>
+                </div>
+                <div className="context-title-img">
+                  <AssetImg width={50} height={18} type="keynotes"/>
+                </div>
+                <div className="context" dangerouslySetInnerHTML={{__html: keynote}}>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="button-footer" onClick={this.closeModal.bind(this)}>关闭</div>
+        </div> : null}
       </div>
     )
   }
-  }
+}

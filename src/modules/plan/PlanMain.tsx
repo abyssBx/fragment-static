@@ -37,6 +37,12 @@ export class PlanMain extends React.Component <any, any> {
       if (code === 200) {
         if (msg !== null) {
           this.setState({ planData: msg })
+          if (msg.summary) {
+            dispatch(alertMsg(<div>
+              <p>很好！你已完成这组训练。</p>
+              <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
+            </div>))
+          }
         } else {
           this.context.router.push({
             pathname: '/fragment/problem/priority'
@@ -52,7 +58,7 @@ export class PlanMain extends React.Component <any, any> {
 
   onPracticeSelected(item) {
     const { dispatch } = this.props
-    const { type, series, sequence, knowledge, unlocked } = item
+    const { type, practicePlanId, knowledge, unlocked } = item
     if (!unlocked) {
       dispatch(alertMsg("该训练尚未解锁"))
       return
@@ -62,18 +68,18 @@ export class PlanMain extends React.Component <any, any> {
       if (item.status === 1) {
         this.context.router.push({
           pathname: '/fragment/practice/warmup/analysis',
-          query: { series, sequence, id: knowledge.id }
+          query: { practicePlanId, id: knowledge.id }
         })
       } else {
         if (!knowledge.appear) {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/intro',
-            query: { series, sequence, id: knowledge.id }
+            query: { practicePlanId, id: knowledge.id }
           })
         } else {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/ready',
-            query: { series, sequence, id: knowledge.id }
+            query: { practicePlanId, id: knowledge.id }
           })
         }
       }
@@ -106,7 +112,10 @@ export class PlanMain extends React.Component <any, any> {
 
   render() {
     const { planData } = this.state
-    const { problem = {}, practice, warmupComplete, applicationComplete, point, total, deadline, status, currentSeries, totalSeries } = planData
+    const {
+      problem = {}, practice, warmupComplete, applicationComplete, point, total,
+      deadline, status, currentSeries, totalSeries
+    } = planData
 
     const practiceRender = (list = []) => {
       return list.map((item, index) => {

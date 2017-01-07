@@ -34,7 +34,7 @@ export class Main extends React.Component <any, any> {
 
   componentWillMount() {
     const { dispatch, location } = this.props
-    const { series, sequence } = location.query
+    const { practicePlanId } = location.query
     dispatch(startLoad())
     loadKnowledgeIntro(location.query.id).then(res => {
       dispatch(endLoad())
@@ -45,7 +45,7 @@ export class Main extends React.Component <any, any> {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
     })
-    loadWarmUpPractice(series, sequence).then(res => {
+    loadWarmUpPractice(practicePlanId).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200)  this.setState({ list: msg, practiceCount: msg.practice.length })
@@ -88,6 +88,7 @@ export class Main extends React.Component <any, any> {
   onSubmit() {
     const { dispatch } = this.props
     const { selected, practice, currentIndex, practiceCount } = this.state
+    const { practicePlanId } = this.props.location.query
     if (selected.length === 0) {
       dispatch(alertMsg("你还没有选择答案哦"))
       return
@@ -98,7 +99,7 @@ export class Main extends React.Component <any, any> {
       console.log('complete')
       this.setChoice(p => {
         dispatch(startLoad())
-        answer({ practice: p }).then(res => {
+        answer({ practice: p }, practicePlanId).then(res => {
           dispatch(endLoad())
           const { code, msg } = res
           if (code === 200)  this.context.router.push({

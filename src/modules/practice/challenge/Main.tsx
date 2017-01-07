@@ -54,8 +54,8 @@ export class Main extends React.Component <any, any> {
               <div className="context-img">
                 <img src="http://www.iquanwai.com/images/fragment/challenge_practice.png" alt=""/>
               </div>
-              <div className="context" dangerouslySetInnerHTML={{__html: description}}>
-              </div>
+              <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
+              <div className="context">还有机会得到圈圈点评。<span className="score">(500分)</span></div>
               <div className="pc-homework">
                 <div className="guide">请前往电脑端登陆</div>
                 <div className="url">{pcurl}</div>

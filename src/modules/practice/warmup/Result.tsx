@@ -43,7 +43,7 @@ export class Result extends React.Component <any, any> {
       const { code, msg } = res
       if (code === 200) {
         const item = msg
-        const { type, series, sequence, knowledge, unlocked } = item
+        const { type, practicePlanId, knowledge, unlocked } = item
         if (!unlocked) {
           dispatch(alertMsg("该训练尚未解锁"))
           return
@@ -52,18 +52,18 @@ export class Result extends React.Component <any, any> {
           if (item.status === 1) {
             this.context.router.push({
               pathname: '/fragment/practice/warmup/analysis',
-              query: { series, sequence, id: knowledge.id }
+              query: { practicePlanId, id: knowledge.id }
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/intro',
-                query: { series, sequence, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id }
               })
             } else {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/ready',
-                query: { series, sequence, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id }
               })
             }
           }
