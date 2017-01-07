@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.get("/practice/warmup/start/*/*", (req, res) => {
+router.get("/practice/warmup/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -86,7 +86,7 @@ router.get("/practice/warmup/start/*/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/warmup/analysis/*/*", (req, res) => {
+router.get("/practice/warmup/analysis/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,

@@ -38,14 +38,14 @@ export class PlanIntro extends React.Component <any, any> {
   }
 
   render() {
-    const { length, endDate, pic } = this.state
+    const { length, endDate, pic, totalSeries } = this.state
 
     return (
       <div>
         <div className="container has-footer">
           <div className="plan-intro">
             <div className="text">从了解到运用这些知识，你会训练的任务共有：</div>
-            <div className="groups">14组</div>
+            <div className="groups">{totalSeries}组</div>
             <div className="text">你需要每天完成一组（1组含4个训练任务）</div>
             <div className="context-img">
               <img src={"http://www.iquanwai.com/images/fragment/play.png"} alt=""/>
