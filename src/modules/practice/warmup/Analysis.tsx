@@ -13,7 +13,8 @@ const sequenceMap = {
   2: 'C',
   3: 'D',
   4: 'E',
-  5: 'F'
+  5: 'F',
+  6: 'G',
 }
 
 @connect(state => state)

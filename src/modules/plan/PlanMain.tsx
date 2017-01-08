@@ -202,7 +202,7 @@ export class PlanMain extends React.Component <any, any> {
           <div className="plan-guide">
             <div className="section-title">{problem.problem}</div>
             <div className="section">
-              <label>已完成:</label> {currentSeries}/{totalSeries}组训练
+              <label>进行中:</label> {currentSeries}/{totalSeries}组训练
             </div>
             <div className="section">
               <label>距关闭:</label> {deadline}天
