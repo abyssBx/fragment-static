@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import "./ProblemPriority.less";
 import { loadMyProblemList } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
+import { Toast, Dialog } from "react-weui";
+const { Alert } = Dialog
 
 @connect(state => state)
 export class ProblemPriority extends React.Component <any, any> {
@@ -11,6 +13,21 @@ export class ProblemPriority extends React.Component <any, any> {
     this.state = {
       problemList: [],
       problemSelected: null,
+    }
+    this.state = {
+      showAlert: false,
+      alert: {
+        buttons: [
+          {
+            label: '再看看',
+            onClick: this.close.bind(this)
+          },
+          {
+            label: '想好了',
+            onClick: this.onSubmit.bind(this)
+          }
+        ]
+      },
     }
   }
 
@@ -49,8 +66,16 @@ export class ProblemPriority extends React.Component <any, any> {
     this.context.router.push({ pathname: '/fragment/problem/report', query: { id: this.state.problemSelected } })
   }
 
+  show() {
+    this.setState({ showAlert: true })
+  }
+
+  close() {
+    this.setState({ showAlert: false })
+  }
+
   render() {
-    const { name, problemList, problemSelected } = this.state
+    const { name, problemList = [], problemSelected } = this.state
 
     const problemListRender = (list) => {
       return list.map(item => {
@@ -76,7 +101,14 @@ export class ProblemPriority extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>下一步</div>
+        <div className="button-footer" onClick={this.show.bind(this)}>下一步</div>
+        <Alert { ...this.state.alert }
+          show={this.state.showAlert}>
+          <p>不同主题涉及的能力模型不同，每个主题所需的训练时间5~10天不等。</p>
+          <p>我会根据你的选择，定制你的训练任务。 </p>
+          <p>下面，选择第一个你要训练的主题！完成后，我们再安排下一个。</p>
+          <p>（提交后不能修改，想好了吗？）</p>
+        </Alert>
       </div>
     )
   }

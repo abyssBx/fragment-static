@@ -51,19 +51,19 @@ export class Ready extends React.Component <any, any> {
                                               height={11}/><span>共三道不定项选择题, 做完后统一看解析</span></div>
             </div>
             <div className="choice-list">
-              <div className="choice start"
-                   onClick={() => this.context.router.push({
-                     pathname: '/fragment/practice/warmup',
-                     query: this.props.location.query
-                   })}>
-                开始训练
-              </div>
               <div className="choice review"
                    onClick={() => this.context.router.push({
                      pathname: '/fragment/practice/warmup/intro',
                      query: this.props.location.query
                    })}>
                 知识点
+              </div>
+              <div className="choice start"
+                   onClick={() => this.context.router.push({
+                     pathname: '/fragment/practice/warmup',
+                     query: this.props.location.query
+                   })}>
+                开始训练
               </div>
             </div>
           </div>

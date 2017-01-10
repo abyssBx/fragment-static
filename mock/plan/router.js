@@ -85,7 +85,7 @@ router.get("/plan/load", (req, res) => {
 				}, {
 					"knowledge": null,
 					"type": 21,
-					"status": 0,
+					"status": 2,
 					"unlocked": true,
 					"practiceIdList": [2],
 					"series": 0,

@@ -134,6 +134,7 @@ export class PlanMain extends React.Component <any, any> {
             <div className="footer">
               {item.status === 1 ? <AssetImg type="finished" width={32} height={28} marginTop={(75-28)/2}/> : null}
               {item.status === 0 ? <AssetImg type="go4" width={27} height={17} marginTop={(75-17)/2}/> : null}
+              {item.status === 2 ? <AssetImg type="improve" width={42} height={17} marginTop={(75-17)/2}/> : null}
             </div>
           </div>
         )

@@ -133,13 +133,12 @@ export class Analysis extends React.Component <any, any> {
     const { analysis, means, keynote, voice } = knowledge
 
     const questionRender = (practice) => {
-      const { question, voice, analysis, choiceList = [] } = practice
+      const { question, voice, analysis, choiceList = [], score = 0 } = practice
       return (
         <div className="intro-container">
           { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
             <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
-            {practice.type === 1 ? <span className="type">(单选题)</span> : null }
-            {practice.type === 2 ? <span className="type">(多选题)</span> : null }
+            <span className="type"><span className="number">{score}</span>分</span>
           </div> : null}
           { voice ? <div className="context-audio">
             <Audio url={voice}/>
