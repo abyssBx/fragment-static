@@ -35,8 +35,15 @@ export class Analysis extends React.Component <any, any> {
     router: React.PropTypes.object.isRequired
   }
 
-  componentWillMount() {
-    const { dispatch, location } = this.props
+  componentWillReceiveProps(newProps) {
+    if (this.props.location.query.practicePlanId !== newProps.location.query.practicePlanId) {
+      this.componentWillMount(newProps)
+    }
+  }
+
+  componentWillMount(props) {
+    const { dispatch, location } = props || this.props
+    this.setState({ currentIndex: 0 })
     const { practicePlanId } = location.query
     dispatch(startLoad())
     loadKnowledgeIntro(location.query.id).then(res => {
