@@ -4,6 +4,7 @@ import "./Main.less";
 import { loadChallengePractice } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
+// import CopyToClipboard from "react-copy-to-clipboard";
 
 @connect(state => state)
 export class Main extends React.Component <any, any> {
@@ -39,6 +40,11 @@ export class Main extends React.Component <any, any> {
     })
   }
 
+  onCopy() {
+    const { dispatch } = this.props
+    dispatch(alertMsg('已复制到剪贴板'))
+  }
+
   render() {
     const { data, knowledge = {} } = this.state
     const { voice, pic, description, pcurl } = data
@@ -56,10 +62,13 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
               <div className="context">还有机会得到圈圈点评。<span className="score">(500分)</span></div>
+              {/**<CopyToClipboard text={pcurl}
+                onCopy={this.onCopy.bind(this)}>**/}
               <div className="pc-homework">
                 <div className="guide">请前往电脑端登陆</div>
                 <div className="url">{pcurl}</div>
               </div>
+              {/**</CopyToClipboard>**/}
             </div>
           </div>
         </div>
