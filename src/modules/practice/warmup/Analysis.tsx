@@ -111,12 +111,12 @@ export class Analysis extends React.Component <any, any> {
         } else if (type === 11) {
           this.context.router.push({
             pathname: '/fragment/practice/application',
-            query: { appId: item.practiceIdList[0], id: knowledge.id, series }
+            query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
           })
         } else if (type === 21) {
           this.context.router.push({
             pathname: '/fragment/practice/challenge',
-            query: { id: item.practiceIdList[0], series }
+            query: { id: item.practiceIdList[0], series, practicePlanId }
           })
         }
       } else {
