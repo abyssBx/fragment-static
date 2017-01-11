@@ -8,6 +8,6 @@ export function loadApplicationPractice(id) {
   return pget(`/practice/application/start/${id}`)
 }
 
-export function loadWarmUpNext() {
-  return pget(`/practice/next`)
+export function loadWarmUpNext(id) {
+  return pget(`/practice/next/${id}`)
 }

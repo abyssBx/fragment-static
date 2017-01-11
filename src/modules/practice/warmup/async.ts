@@ -16,8 +16,8 @@ export function loadWarmUpAnalysis(practicePlanId) {
   return pget(`/practice/warmup/analysis/${practicePlanId}`)
 }
 
-export function loadWarmUpNext() {
-  return pget(`/practice/next`)
+export function loadWarmUpNext(id) {
+  return pget(`/practice/next/${id}`)
 }
 
 export function answer(params, practicePlanId) {

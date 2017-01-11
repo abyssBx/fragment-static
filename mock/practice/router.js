@@ -181,7 +181,7 @@ router.get("/practice/warmup/analysis/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/practice/warmup/answer", (req, res) => {
+router.post("/practice/warmup/answer/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -192,7 +192,7 @@ router.post("/practice/warmup/answer", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/next", (req, res) => {
+router.get("/practice/next/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,

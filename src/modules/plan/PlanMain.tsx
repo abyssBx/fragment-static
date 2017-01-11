@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./PlanMain.less";
-import { loadPlan, loadWarmUpNext } from "./async";
+import { loadPlan, loadPlanHistory, loadWarmUpNext } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 import AssetImg from "../../components/AssetImg";
 
@@ -28,36 +28,68 @@ export class PlanMain extends React.Component <any, any> {
     router: React.PropTypes.object.isRequired
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(newProps) {
+    if (this.props.location.query.series !== newProps.location.query.series) {
+      this.componentWillMount(newProps.location.query.series)
+    }
+  }
+
+  componentWillMount(id) {
     const { dispatch, location } = this.props
     dispatch(startLoad())
-    loadPlan().then(res => {
-      dispatch(endLoad())
-      const { code, msg } = res
-      if (code === 200) {
-        if (msg !== null) {
-          this.setState({ planData: msg })
-          if (msg.summary) {
-            dispatch(alertMsg(<div>
-              <p>很好！你已完成这组训练。</p>
-              <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
-            </div>))
+    if (id !== undefined || location.query.series !== undefined) {
+      loadPlanHistory(id || location.query.series).then(res => {
+        dispatch(endLoad())
+        const { code, msg } = res
+        if (code === 200) {
+          if (msg !== null) {
+            this.setState({ planData: msg })
+            if (msg.summary) {
+              dispatch(alertMsg(<div>
+                <p>很好！你已完成这组训练。</p>
+                <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
+              </div>))
+            }
+          } else {
+            dispatch(alertMsg("下一组任务明早6点解锁"))
           }
-        } else {
-          this.context.router.push({
-            pathname: '/fragment/problem/priority'
-          })
         }
-      }
-      else dispatch(alertMsg(msg))
-    }).catch(ex => {
-      dispatch(endLoad())
-      dispatch(alertMsg(ex))
-    })
+        else dispatch(alertMsg(msg))
+      }).catch(ex => {
+        dispatch(endLoad())
+        dispatch(alertMsg(ex))
+      })
+    } else {
+      loadPlan().then(res => {
+        dispatch(endLoad())
+        const { code, msg } = res
+        if (code === 200) {
+          if (msg !== null) {
+            this.setState({ planData: msg })
+            if (msg.summary) {
+              dispatch(alertMsg(<div>
+                <p>很好！你已完成这组训练。</p>
+                <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
+              </div>))
+            }
+          } else {
+            this.context.router.push({
+              pathname: '/fragment/problem/priority'
+            })
+          }
+        }
+        else dispatch(alertMsg(msg))
+      }).catch(ex => {
+        dispatch(endLoad())
+        dispatch(alertMsg(ex))
+      })
+    }
   }
 
   onPracticeSelected(item) {
     const { dispatch } = this.props
+    const { planData } = this.state
+    const { currentSeries } = planData
     const { type, practicePlanId, knowledge, unlocked } = item
     if (!unlocked) {
       dispatch(alertMsg("该训练尚未解锁"))
@@ -68,30 +100,30 @@ export class PlanMain extends React.Component <any, any> {
       if (item.status === 1) {
         this.context.router.push({
           pathname: '/fragment/practice/warmup/analysis',
-          query: { practicePlanId, id: knowledge.id }
+          query: { practicePlanId, id: knowledge.id, series: currentSeries }
         })
       } else {
         if (!knowledge.appear) {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/intro',
-            query: { practicePlanId, id: knowledge.id }
+            query: { practicePlanId, id: knowledge.id, series: currentSeries }
           })
         } else {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/ready',
-            query: { practicePlanId, id: knowledge.id }
+            query: { practicePlanId, id: knowledge.id, series: currentSeries }
           })
         }
       }
     } else if (type === 11) {
       this.context.router.push({
         pathname: '/fragment/practice/application',
-        query: { appId: item.practiceIdList[0], id: knowledge.id }
+        query: { appId: item.practiceIdList[0], id: knowledge.id, series: currentSeries }
       })
     } else if (type === 21) {
       this.context.router.push({
         pathname: '/fragment/practice/challenge',
-        query: { id: item.practiceIdList[0] }
+        query: { id: item.practiceIdList[0], series: currentSeries }
       })
     }
   }
@@ -108,6 +140,23 @@ export class PlanMain extends React.Component <any, any> {
         dispatch(alertMsg(msg))
       }
     })
+  }
+
+  prev() {
+    const { dispatch } = this.props
+    const { planData } = this.state
+    const { currentSeries } = planData
+    if (currentSeries === 1) {
+      dispatch(alertMsg("当前已经是第一组训练"))
+      return
+    }
+    this.context.router.push({ pathname: this.props.location.pathname, query: { series: currentSeries - 1 } })
+  }
+
+  next() {
+    const { planData } = this.state
+    const { currentSeries } = planData
+    this.context.router.push({ pathname: this.props.location.pathname, query: { series: currentSeries + 1 } })
   }
 
   render() {
@@ -221,7 +270,12 @@ export class PlanMain extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.nextTask.bind(this)}>开始</div>
+        {/**<div className="button-footer" onClick={this.nextTask.bind(this)}>开始</div>**/}
+        <div className="button-footer">
+          <div className={`left origin ${currentSeries === 0 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一组
+          </div>
+          <div className={`right`} onClick={this.next.bind(this)}>下一组</div>
+        </div>
       </div>
     )
   }

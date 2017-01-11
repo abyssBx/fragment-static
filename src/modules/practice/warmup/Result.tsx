@@ -37,8 +37,9 @@ export class Result extends React.Component <any, any> {
 
   nextTask() {
     const { dispatch } = this.props
+    const { series, practicePlanId } = this.props.location.query
     dispatch(startLoad())
-    loadWarmUpNext().then(res => {
+    loadWarmUpNext(practicePlanId).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
@@ -52,30 +53,30 @@ export class Result extends React.Component <any, any> {
           if (item.status === 1) {
             this.context.router.push({
               pathname: '/fragment/practice/warmup/analysis',
-              query: { practicePlanId, id: knowledge.id }
+              query: { practicePlanId, id: knowledge.id, series }
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/intro',
-                query: { practicePlanId, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id, series }
               })
             } else {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/ready',
-                query: { practicePlanId, id: knowledge.id }
+                query: { practicePlanId, id: knowledge.id, series }
               })
             }
           }
         } else if (type === 11) {
           this.context.router.push({
             pathname: '/fragment/practice/application',
-            query: { appId: item.practiceIdList[0], id: knowledge.id }
+            query: { appId: item.practiceIdList[0], id: knowledge.id, series }
           })
         } else if (type === 21) {
           this.context.router.push({
             pathname: '/fragment/practice/challenge',
-            query: { id: item.practiceIdList[0] }
+            query: { id: item.practiceIdList[0], series }
           })
         }
       } else {
