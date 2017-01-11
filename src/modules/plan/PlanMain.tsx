@@ -29,7 +29,7 @@ export class PlanMain extends React.Component <any, any> {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.location.query.series !== newProps.location.query.series) {
+    if (this.props.location.query.series !== newProps.location.query.series && newProps.location.query.series !== undefined) {
       this.componentWillMount(newProps.location.query.series)
     }
   }
@@ -51,6 +51,7 @@ export class PlanMain extends React.Component <any, any> {
               </div>))
             }
           } else {
+            this.context.router.push({ pathname: location.pathname })
             dispatch(alertMsg("下一组任务明早6点解锁"))
           }
         }
@@ -89,7 +90,7 @@ export class PlanMain extends React.Component <any, any> {
   onPracticeSelected(item) {
     const { dispatch } = this.props
     const { planData } = this.state
-    const { currentSeries } = planData
+    const { series } = planData
     const { type, practicePlanId, knowledge, unlocked } = item
     if (!unlocked) {
       dispatch(alertMsg("该训练尚未解锁"))
@@ -100,30 +101,30 @@ export class PlanMain extends React.Component <any, any> {
       if (item.status === 1) {
         this.context.router.push({
           pathname: '/fragment/practice/warmup/analysis',
-          query: { practicePlanId, id: knowledge.id, series: currentSeries }
+          query: { practicePlanId, id: knowledge.id, series }
         })
       } else {
         if (!knowledge.appear) {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/intro',
-            query: { practicePlanId, id: knowledge.id, series: currentSeries }
+            query: { practicePlanId, id: knowledge.id, series }
           })
         } else {
           this.context.router.push({
             pathname: '/fragment/practice/warmup/ready',
-            query: { practicePlanId, id: knowledge.id, series: currentSeries }
+            query: { practicePlanId, id: knowledge.id, series }
           })
         }
       }
     } else if (type === 11) {
       this.context.router.push({
         pathname: '/fragment/practice/application',
-        query: { appId: item.practiceIdList[0], id: knowledge.id, series: currentSeries }
+        query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
       })
     } else if (type === 21) {
       this.context.router.push({
         pathname: '/fragment/practice/challenge',
-        query: { id: item.practiceIdList[0], series: currentSeries }
+        query: { id: item.practiceIdList[0], series, practicePlanId }
       })
     }
   }
@@ -145,25 +146,25 @@ export class PlanMain extends React.Component <any, any> {
   prev() {
     const { dispatch } = this.props
     const { planData } = this.state
-    const { currentSeries } = planData
-    if (currentSeries === 1) {
+    const { series } = planData
+    if (series === 1) {
       dispatch(alertMsg("当前已经是第一组训练"))
       return
     }
-    this.context.router.push({ pathname: this.props.location.pathname, query: { series: currentSeries - 1 } })
+    this.context.router.push({ pathname: this.props.location.pathname, query: { series: series - 1 } })
   }
 
   next() {
     const { planData } = this.state
-    const { currentSeries } = planData
-    this.context.router.push({ pathname: this.props.location.pathname, query: { series: currentSeries + 1 } })
+    const { series } = planData
+    this.context.router.push({ pathname: this.props.location.pathname, query: { series: series + 1 } })
   }
 
   render() {
     const { planData } = this.state
     const {
       problem = {}, practice, warmupComplete, applicationComplete, point, total,
-      deadline, status, currentSeries, totalSeries
+      deadline, status, currentSeries, totalSeries, series
     } = planData
 
     const practiceRender = (list = []) => {
@@ -252,7 +253,7 @@ export class PlanMain extends React.Component <any, any> {
           <div className="plan-guide">
             <div className="section-title">{problem.problem}</div>
             <div className="section">
-              <label>进行中:</label> {currentSeries}/{totalSeries}组训练
+              <label>进行中:</label> {series}/{totalSeries}组训练
             </div>
             <div className="section">
               <label>距关闭:</label> {deadline}天
@@ -272,7 +273,7 @@ export class PlanMain extends React.Component <any, any> {
         </div>
         {/**<div className="button-footer" onClick={this.nextTask.bind(this)}>开始</div>**/}
         <div className="button-footer">
-          <div className={`left origin ${currentSeries === 0 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一组
+          <div className={`left origin ${series === 1 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一组
           </div>
           <div className={`right`} onClick={this.next.bind(this)}>下一组</div>
         </div>

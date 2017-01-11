@@ -66,7 +66,7 @@ export class Main extends React.Component <any, any> {
               {/**<CopyToClipboard text={pcurl}
                 onCopy={this.onCopy.bind(this)}>**/}
               <div className="pc-homework">
-                <div className="guide">请前往电脑端登陆</div>
+                <div className="guide">请在浏览器中打开链接（推荐电脑端）</div>
                 <div className="url">{pcurl}</div>
               </div>
               {/**</CopyToClipboard>**/}

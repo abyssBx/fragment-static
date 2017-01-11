@@ -5,6 +5,7 @@ import { loadKnowledgeIntro, loadApplicationPractice, loadWarmUpNext } from "./a
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 import AssetImg from "../../../components/AssetImg";
+import KnowledgeViewer from "../components/KnowledgeViewer";
 
 @connect(state => state)
 export class Main extends React.Component <any, any> {
@@ -13,6 +14,7 @@ export class Main extends React.Component <any, any> {
     this.state = {
       data: {},
       knowledge: {},
+      showKnowledge: false,
     }
   }
 
@@ -93,8 +95,12 @@ export class Main extends React.Component <any, any> {
     })
   }
 
+  closeModal() {
+    this.setState({ showKnowledge: false })
+  }
+
   render() {
-    const { data, knowledge = {} } = this.state
+    const { data, knowledge = {}, showKnowledge } = this.state
     const { voice, pic, description } = data
 
     return (
@@ -119,10 +125,12 @@ export class Main extends React.Component <any, any> {
                 <div className="section2" dangerouslySetInnerHTML={{__html: description}}>
                 </div>
               </div>
+              <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
             </div>
           </div>
         </div>
         <div className="button-footer" onClick={this.onSubmit.bind(this)}>继续训练</div>
+        {showKnowledge ? <KnowledgeViewer knowledge={knowledge} closeModal={this.closeModal.bind(this)}/> : null}
       </div>
     )
   }
