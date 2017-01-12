@@ -62,11 +62,12 @@ export class Main extends React.Component <any, any> {
                 <img src="http://www.iquanwai.com/images/fragment/challenge_practice.png" alt=""/>
               </div>
               <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
-              <div className="context">还有机会得到圈圈点评。<span className="score">(500分)</span></div>
+              <div className="context">输出带动输入，才是最好的学习方式！记录下你参加这个主题训练的小目标、应用任务实践的心得、以及最后的目标完成情况和收获总结吧！还有机会获得圈圈点评。<span
+                className="score">(500分)</span></div>
               {/**<CopyToClipboard text={pcurl}
                 onCopy={this.onCopy.bind(this)}>**/}
               <div className="pc-homework">
-                <div className="guide">请在浏览器中打开链接（推荐电脑端）</div>
+                <div className="guide">请在浏览器地址栏中打开链接（推荐电脑端）</div>
                 <div className="url">{pcurl}</div>
               </div>
               {/**</CopyToClipboard>**/}
