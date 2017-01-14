@@ -19,6 +19,7 @@
     .application-title {
       text-align: center;
       margin: 18px 0;
+      position: relative;
       > * {
         display: inline-block;
         vertical-align: middle;
@@ -50,6 +51,33 @@
       font-size: 13px;
       height: 30px;
       margin-top: 15px;
+    }
+    > .pc-homework {
+      position: relative;
+      left: 50%;
+      margin-left: -135px;
+      width: 270px;
+      margin-top: 30px;
+      text-align: center;
+      > .guide {
+        font-size: 12px;
+        line-height: 12px;
+        color: @color_context;
+      }
+      > .sub-guide {
+        font-size: 10px;
+        line-height: 10px;
+        color: #666666;
+        margin-top: 4px;
+      }
+      > .url {
+        height: 105px;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 105px;
+        border: 1px dashed #cccccc;
+        color: @color_context;
+      }
     }
   }
 }

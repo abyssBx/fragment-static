@@ -94,9 +94,9 @@ export class ProblemPriority extends React.Component <any, any> {
         <div className="container has-footer">
           <div className="problem-priority">
             { problemList && problemList.length > 0 ? <div className="info">
-              <p>不同主题涉及的能力模型不同，每个主题所需的训练时间5~10天不等。</p>
+              <p>不同专题涉及的能力模型不同，每个专题所需的训练时间5~10天不等。</p>
               <p>我会根据你的选择，定制你的训练任务。 </p>
-              <p>下面，选择第一个你要训练的主题！完成后，我们再安排下一个。</p>
+              <p>下面，选择第一个你要训练的专题！完成后，我们再安排下一个。</p>
             </div> : null }
             <div className="list">
               {problemListRender(problemList)}

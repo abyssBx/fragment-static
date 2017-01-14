@@ -53,7 +53,7 @@ export class PlanIntro extends React.Component <any, any> {
             <div className="context">完成后第二天早上6点会解锁下一组</div>
             <div className="text" style={{marginTop: 35}}>你共有{length}天完成所有的训练，截止日期如下：</div>
             <div className="date">{endDate}</div>
-            <div className="context">训练到期并自动关闭。完成该主题的训练后，可以继续选择下一个主题训练。</div>
+            <div className="context">训练到期并自动关闭。完成该专题的训练后，可以继续选择下一个专题训练。</div>
             <div className="text" style={{marginTop: 35}}>点击下方按钮，开始第一天的训练吧</div>
           </div>
         </div>

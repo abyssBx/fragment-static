@@ -4,7 +4,6 @@ import "./Main.less";
 import { loadChallengePractice } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
-// import CopyToClipboard from "react-copy-to-clipboard";
 
 @connect(state => state)
 export class Main extends React.Component <any, any> {
@@ -62,14 +61,16 @@ export class Main extends React.Component <any, any> {
                 <img src="http://www.iquanwai.com/images/fragment/challenge_practice.png" alt=""/>
               </div>
               <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
-              <div className="context">输出带动输入，才是最好的学习方式！记录下你参加这个主题训练的小目标、应用任务实践的心得、以及最后的目标完成情况和收获总结吧！还有机会获得圈圈点评。</div>
-              {/**<CopyToClipboard text={pcurl}
-                onCopy={this.onCopy.bind(this)}>**/}
+              <div className="context">
+                <p>好的开始是成功的一半！让我们来完成今天最后一个任务--核心训练。</p>
+                <p>参加这个专题的训练，你想实现什么目标呢？制定目标帮你更积极地学习，也带给你更多成就感！</p>
+                <p>建议在未来几天的学习中，也在这个任务里记录下通过学习实现目标的情况。现在就去圈外社区写目标吧！</p>
+              </div>
               <div className="pc-homework">
-                <div className="guide">请在浏览器地址栏中打开链接（推荐电脑端）</div>
+                <div className="guide">圈外社区链接</div>
+                <div className="sub-guide">（推荐使用电脑端浏览器访问）</div>
                 <div className="url">{pcurl}</div>
               </div>
-              {/**</CopyToClipboard>**/}
             </div>
           </div>
         </div>

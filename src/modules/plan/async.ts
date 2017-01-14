@@ -1,4 +1,4 @@
-import { pget } from "utils/request";
+import { pget, ppost } from "utils/request";
 
 export function loadPlan() {
   return pget(`/plan/load`)
@@ -18,4 +18,12 @@ export function submitProblemList(params) {
 
 export function loadWarmUpNext(id) {
   return pget(`/practice/next/${id}`)
+}
+
+export function completePlan() {
+  return ppost(`/plan/complete`)
+}
+
+export function closePlan() {
+  return ppost(`/plan/close`)
 }

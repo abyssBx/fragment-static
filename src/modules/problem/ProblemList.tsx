@@ -92,7 +92,7 @@ export class ProblemList extends React.Component <any, any> {
             { problemList && problemList.length > 0 ? <div className="info">
               <p>你好，{name}，我是你的圈外每日提升教练。</p>
               <p>训练开始前，我想更了解你的情况。</p>
-              <p>以下的主题，你对哪些感兴趣呢？</p>
+              <p>以下的专题，你对哪些感兴趣呢？</p>
               <p>(可多选)</p>
             </div> : null }
             <div className="list">

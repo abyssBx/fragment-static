@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./PlanMain.less";
-import { loadPlan, loadPlanHistory, loadWarmUpNext } from "./async";
+import { loadPlan, loadPlanHistory, loadWarmUpNext, completePlan, closePlan } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 import AssetImg from "../../components/AssetImg";
 
@@ -21,6 +21,7 @@ export class PlanMain extends React.Component <any, any> {
     this.state = {
       planData: {},
       knowledge: {},
+      showCompleteModal: false,
     }
   }
 
@@ -156,12 +157,48 @@ export class PlanMain extends React.Component <any, any> {
 
   next() {
     const { planData } = this.state
-    const { series } = planData
-    this.context.router.push({ pathname: this.props.location.pathname, query: { series: series + 1 } })
+    const { series, totalSeries } = planData
+    if (series === totalSeries) {
+
+    } else {
+      this.context.router.push({ pathname: this.props.location.pathname, query: { series: series + 1 } })
+    }
+  }
+
+  complete() {
+    const { dispatch } = this.props
+    dispatch(startLoad())
+    completePlan().then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
+      if (code === 200) {
+        this.setState({ showCompleteModal: true })
+      } else {
+        dispatch(alertMsg(msg))
+      }
+    })
+  }
+
+  closeCompleteModal() {
+    this.setState({ showCompleteModal: false })
+  }
+
+  nextPlan() {
+    const { dispatch } = this.props
+    dispatch(startLoad())
+    closePlan().then(res => {
+      dispatch(endLoad())
+      const { code, msg } = res
+      if (code === 200) {
+        this.context.router.push("/fragment/problem/priority")
+      } else {
+        dispatch(alertMsg(msg))
+      }
+    })
   }
 
   render() {
-    const { planData } = this.state
+    const { planData, showCompleteModal } = this.state
     const {
       problem = {}, practice, warmupComplete, applicationComplete, point, total,
       deadline, status, currentSeries, totalSeries, series
@@ -185,6 +222,7 @@ export class PlanMain extends React.Component <any, any> {
               {item.status === 1 ? <AssetImg type="finished" width={32} height={28} marginTop={(75-28)/2}/> : null}
               {item.status === 0 ? <AssetImg type="go4" width={27} height={17} marginTop={(75-17)/2}/> : null}
               {item.status === 2 ? <AssetImg type="improve" width={42} height={17} marginTop={(75-17)/2}/> : null}
+              {item.status === 3 ? <AssetImg type="alter" width={32} height={17} marginTop={(75-17)/2}/> : null}
             </div>
           </div>
         )
@@ -193,56 +231,47 @@ export class PlanMain extends React.Component <any, any> {
 
     return (
       <div>
-        { status === 2 ?
+        { showCompleteModal ?
           <div className="mask">
             <div className="finished_modal">
-              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal.png"/>
+              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal2.png"/>
               <div className="modal_context">
-                <div className="title">
-                  你的"{problem.problem}"已经完成了! <br/>
-                  这个过程中, 你共完成了:
-                </div>
-                <div className="content">
-                  <span className="number">{warmupComplete}</span><span className="text">个热身训练</span>
-                </div>
-                <div className="content">
-                  <span className="number">{applicationComplete}</span><span className="text">个应用训练</span>
-                </div>
-                <div className="sub-title">获得了</div>
+                <div className="content">太棒了</div>
+                <div className="content">你已完成本专题全部必修训练</div>
                 <div className="content2">
-                  <span className="number">{point}</span><span className="text">积分</span>
+                  获得了<span className="number">{point}</span>积分
                 </div>
+                <div className="content">本专题社区永久开放</div>
+                <div className="content">继续完成选做题</div>
+                <div className="content">拿更多积分</div>
                 {/**<div className="button">分享一下</div>**/}
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
+                <div className="button finished" onClick={this.nextPlan.bind(this)}>
+                  下一专题
                 </div>
+                <div className="button finished" onClick={this.closeCompleteModal.bind(this)}>关闭</div>
               </div>
-            </div>
-            <div className="ended_modal">
-
             </div>
           </div>
           : null }
         { status === 3 ?
           <div className="mask">
             <div className="finished_modal">
-              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/expire_modal.png"/>
+              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/expire_modal2.png"/>
               <div className="modal_context">
-                <div className="title">
-                  你的"{problem.problem}"已经到期了! <br/>
-                  这个过程中, 你共完成了:
-                </div>
-                <div className="content">
-                  <span className="number">{warmupComplete}</span><span className="text">个热身训练</span>
-                </div>
-                <div className="content">
-                  <span className="number">{applicationComplete}</span><span className="text">个应用训练</span>
-                </div>
-                <div className="sub-title">获得了</div>
+                <div className="content">本专题的开放天数已用尽</div>
                 <div className="content2">
-                  <span className="number">{point}</span><span className="text">积分</span>
+                  你共完成了<span className="number">{warmupComplete}</span>个热身训练
                 </div>
+                <div className="content2">
+                  你共完成了<span className="number">{applicationComplete}</span>个应用训练
+                </div>
+                <div className="content2">
+                  获得了<span className="number">{point}</span>积分
+                </div>
+                <div className="content">本专题社区永久开放</div>
+                <div className="content">可登陆网站参与讨论</div>
                 {/**<div className="button">分享一下</div>**/}
-                <div className="button" onClick={() => this.context.router.push("/fragment/problem/priority")}>再来一个
+                <div className="button" onClick={this.nextPlan.bind(this)}>下一专题
                 </div>
               </div>
             </div>
@@ -275,7 +304,9 @@ export class PlanMain extends React.Component <any, any> {
         <div className="button-footer">
           <div className={`left origin ${series === 1 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一组
           </div>
-          <div className={`right`} onClick={this.next.bind(this)}>下一组</div>
+          { series !== totalSeries ? <div className={`right`} onClick={this.next.bind(this)}>下一组</div> : null }
+          { series === totalSeries ? <div className={`right`} onClick={this.complete.bind(this)}>
+            完成训练</div> : null }
         </div>
       </div>
     )

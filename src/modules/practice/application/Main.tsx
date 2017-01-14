@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./Main.less";
-import { loadKnowledgeIntro, loadApplicationPractice, loadWarmUpNext } from "./async";
+import { loadKnowledgeIntro, loadApplicationPractice } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 import AssetImg from "../../../components/AssetImg";
@@ -46,52 +46,9 @@ export class Main extends React.Component <any, any> {
   }
 
   onSubmit() {
-    const { dispatch } = this.props
-    const { series, practicePlanId } = this.props.location.query
-    dispatch(startLoad())
-    loadWarmUpNext(practicePlanId).then(res => {
-      dispatch(endLoad())
-      const { code, msg } = res
-      if (code === 200) {
-        const item = msg
-        const { type, practicePlanId, knowledge, unlocked } = item
-        if (!unlocked) {
-          dispatch(alertMsg("该训练尚未解锁"))
-          return
-        }
-        if (type === 1 || type === 2) {
-          if (item.status === 1) {
-            this.context.router.push({
-              pathname: '/fragment/practice/warmup/analysis',
-              query: { practicePlanId, id: knowledge.id, series }
-            })
-          } else {
-            if (!knowledge.appear) {
-              this.context.router.push({
-                pathname: '/fragment/practice/warmup/intro',
-                query: { practicePlanId, id: knowledge.id, series }
-              })
-            } else {
-              this.context.router.push({
-                pathname: '/fragment/practice/warmup/ready',
-                query: { practicePlanId, id: knowledge.id, series }
-              })
-            }
-          }
-        } else if (type === 11) {
-          this.context.router.push({
-            pathname: '/fragment/practice/application',
-            query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
-          })
-        } else if (type === 21) {
-          this.context.router.push({
-            pathname: '/fragment/practice/challenge',
-            query: { id: item.practiceIdList[0], series, practicePlanId }
-          })
-        }
-      } else {
-        dispatch(alertMsg(msg))
-      }
+    this.context.router.push({
+      pathname: '/fragment/plan/main',
+      query: { series: this.props.location.query.series }
     })
   }
 
@@ -117,7 +74,7 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="application-context">
                 <div className="section1">
-                  <p>好了，今天的知识点学完了，学以致用一下吧！思考、实践下面的内容，如果有心得或疑问，请在挑战训练的链接中记录下来，将有机会得到圈圈的反馈。</p>
+                  <p>好了，学以致用一下吧！结合相关知识点，思考并实践下面的任务。在圈外社区里记录下你的经历，还会收获积分。</p>
                 </div>
                 <div className="application-title">
                   <AssetImg type="app" size={15}/><span>今日应用</span>
@@ -126,10 +83,15 @@ export class Main extends React.Component <any, any> {
                 </div>
               </div>
               <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
+              <div className="pc-homework">
+                <div className="guide">圈外社区链接</div>
+                <div className="sub-guide">（推荐使用电脑端浏览器访问）</div>
+                <div className="url">{"http://www.iquanwai.com/home"}</div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="button-footer" onClick={this.onSubmit.bind(this)}>继续训练</div>
+        <div className="button-footer" onClick={this.onSubmit.bind(this)}>返回</div>
         {showKnowledge ? <KnowledgeViewer knowledge={knowledge} closeModal={this.closeModal.bind(this)}/> : null}
       </div>
     )
