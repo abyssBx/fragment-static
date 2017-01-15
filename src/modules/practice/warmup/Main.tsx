@@ -5,6 +5,7 @@ import "./Main.less";
 import { loadWarmUpPractice, loadKnowledgeIntro, answer } from "./async";
 import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
 import Audio from "../../../components/Audio";
+import KnowledgeViewer from "../components/KnowledgeViewer";
 
 const sequenceMap = {
   0: 'A',
@@ -26,6 +27,7 @@ export class Main extends React.Component <any, any> {
       practiceCount: 0,
       selected: [],
       knowledge: {},
+      showKnowledge: false,
     }
   }
 
@@ -113,8 +115,12 @@ export class Main extends React.Component <any, any> {
     }
   }
 
+  closeModal() {
+    this.setState({ showKnowledge: false })
+  }
+
   render() {
-    const { list, currentIndex, selected, knowledge, practiceCount } = this.state
+    const { list, currentIndex, selected, knowledge, practiceCount, showKnowledge } = this.state
     const { practice = [] } = list
 
     const questionRender = (practice) => {
@@ -134,6 +140,7 @@ export class Main extends React.Component <any, any> {
           <div className="choice-list">
             {choiceList.map((choice, idx) => choiceRender(choice, idx))}
           </div>
+          <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>不确定? 瞄一眼知识点</div>
         </div>
       )
     }
@@ -158,6 +165,7 @@ export class Main extends React.Component <any, any> {
           </div>
         </div>
         <div className="button-submit" onClick={this.onSubmit.bind(this)}>提交</div>
+        {showKnowledge ? <KnowledgeViewer knowledge={knowledge} closeModal={this.closeModal.bind(this)}/> : null}
       </div>
     )
   }
