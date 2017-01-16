@@ -62,8 +62,8 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="context" dangerouslySetInnerHTML={{__html: description}}></div>
               <div className="context">
-                <p>好的开始是成功的一半！让我们来完成今天最后一个任务--核心训练。</p>
-                <p>参加这个专题的训练，你想实现什么目标呢？制定目标帮你更积极地学习，也带给你更多成就感！</p>
+                <p>好的开始是成功的一半！让我们来完成今天最后一个任务--专题训练。</p>
+                <p>选择这个专题，你是想实现什么目标呢？制定目标帮你更积极地学习，也带给你更多成就感！</p>
                 <p>建议在未来几天的学习中，也在这个任务里记录下通过学习实现目标的情况。现在就去圈外社区写目标吧！</p>
               </div>
               <div className="pc-homework">

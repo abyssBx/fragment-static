@@ -55,6 +55,12 @@ export class PlanMain extends React.Component <any, any> {
             this.context.router.push({ pathname: location.pathname })
             dispatch(alertMsg("下一组任务明早6点解锁"))
           }
+        } else if (code === 211) {
+          this.context.router.push({ pathname: location.pathname })
+          dispatch(alertMsg("下一组任务明早6点解锁"))
+        } else if (code === 212) {
+          this.context.router.push({ pathname: location.pathname })
+          dispatch(alertMsg("先完成这一组的必修任务吧"))
         }
         else dispatch(alertMsg(msg))
       }).catch(ex => {
