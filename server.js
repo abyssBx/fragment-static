@@ -25,7 +25,7 @@ var serverConfig = {
 // 所有的配置 https://github.com/nodejitsu/node-http-proxy#options
 if (Boolean(PROXY)) {
   serverConfig.proxy = {
-    "/*": (function() {
+    "/": (function() {
         var config = {
           target: PROXY,
           secure: false,

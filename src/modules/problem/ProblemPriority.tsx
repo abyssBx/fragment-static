@@ -45,7 +45,11 @@ export class ProblemPriority extends React.Component <any, any> {
         if (!msg.problemList.length || msg.problemList.length === 0) {
           this.context.router.push({ pathname: '/fragment/problem/list' })
         } else {
-          this.setState(msg)
+          if(msg.problemList.length === 1){
+            this.setState({problemList:msg.problemList,problemSelected:msg.problemList[0].problemId})
+          } else {
+            this.setState(msg)
+          }
         }
       }
       else dispatch(alertMsg(msg))
@@ -67,7 +71,13 @@ export class ProblemPriority extends React.Component <any, any> {
   }
 
   show() {
-    this.setState({ showAlert: true })
+    const { dispatch } = this.props;
+    const { problemSelected } = this.state;
+    if(!problemSelected) {
+      dispatch(alertMsg("请先选择接下来要解决的问题"))
+    } else {
+      this.setState({showAlert: true})
+    }
   }
 
   close() {
