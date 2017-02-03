@@ -40,12 +40,12 @@ router.get("/problem/load/mine", (req, res) => {
 						"problemId": 1, //问题id
 						"problem": "问题描述", //问题描述
 						"status": 0 //0-待解决，1-解决中，2-已解决
-					},
-					{
-						"problemId": 2, //问题id
-						"problem": "问题描述", //问题描述
-						"status": 0 //0-待解决，1-解决中，2-已解决
-					}
+            },
+            {
+              "problemId": 2, //问题id
+              "problem": "问题描述", //问题描述
+              "status": 0 //0-待解决，1-解决中，2-已解决
+            }
 				]
 			}
 		}), Math.random() * 1500)
