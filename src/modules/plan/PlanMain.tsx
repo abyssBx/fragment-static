@@ -251,9 +251,9 @@ export class PlanMain extends React.Component <any, any> {
                 <div className="content">继续完成选做题</div>
                 <div className="content">拿更多积分</div>
                 {/**<div className="button">分享一下</div>**/}
-                {/**<div className="button finished" onClick={this.nextPlan.bind(this)}>
+                <div className="button finished" onClick={this.nextPlan.bind(this)}>
                   下一专题
-                  </div>**/}
+                </div>
                 <div className="button finished" onClick={this.closeCompleteModal.bind(this)}>关闭</div>
               </div>
             </div>
@@ -277,8 +277,8 @@ export class PlanMain extends React.Component <any, any> {
                 <div className="content">本专题社区永久开放</div>
                 <div className="content">可登陆网站参与讨论</div>
                 {/**<div className="button">分享一下</div>**/}
-                {/**<div className="button" onClick={this.nextPlan.bind(this)}>下一专题
-                  </div>**/}
+                <div className="button" onClick={this.nextPlan.bind(this)}>下一专题
+                </div>
               </div>
             </div>
           </div>
