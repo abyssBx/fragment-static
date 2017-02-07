@@ -329,7 +329,7 @@ export class PlanMain extends React.Component <any, any> {
             </div>
           </div>
           <div className="problem-review" onClick={() => this.problemReview(problem.id)}>
-            本专题详情
+            专题详情
           </div>
         </div>
         <div className="container has-footer"
