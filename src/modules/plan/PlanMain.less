@@ -76,3 +76,57 @@
     }
   }
 }
+
+.problem-review{
+  position: absolute;
+  right:10px;
+  margin-top:-31px;
+  font-size:11px;
+  width:65px;
+  height:23px;
+  background-color: @color_theme;
+  color: #ffffff;
+  text-align: center;
+  line-height: 23px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.modal-button-footer {
+  display: block;
+  position: inherit;
+  font-size: 20px;
+  width: 100%;
+  height: @button_footer_height;
+  text-align: center;
+  line-height: @button_footer_height;
+  background-color: @color_theme;
+  border-radius: 0 0 25px 25px;
+  color: white;
+  &.complete {
+    margin-top: 60px;
+  }
+  &.confirm {
+    margin-top: 88px;
+  }
+  > .left {
+    display: inline-block;
+    width: ~"calc(50% - 1px)";
+    border-right: 1px solid white;
+    &.origin {
+      background-color: @color_theme;
+    }
+    &.disabled {
+      background-color: #cccccc;
+    }
+  }
+  > .right {
+    display: inline-block;
+    width: 50%;
+    border-radius: 0 30px 0 0;
+    &.disabled {
+      background-color: #cccccc;
+    }
+  }
+}

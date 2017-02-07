@@ -46,7 +46,7 @@ router.get("/plan/load", (req, res) => {
 				"problem": {
 					"id": 2,
 					"problem": "跟老板",
-					"pic": "http://www.iquanwai.com/images/problem1.png",
+					"pic": "http://www.iquanwai.com/images/fragment/problem1.png",
 					"length": 5,
 					"warmupCount": 10,
 					"applicationCount": 5,
@@ -143,7 +143,7 @@ router.get("/plan/history/load/*", (req, res) => {
 				"problem": {
 					"id": 2,
 					"problem": "跟老板",
-					"pic": "http://www.iquanwai.com/images/problem1.png",
+					"pic": "http://www.iquanwai.com/images/fragment/problem1.png",
 					"length": 5,
 					"warmupCount": 10,
 					"applicationCount": 5,

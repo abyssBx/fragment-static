@@ -22,6 +22,7 @@ export class PlanMain extends React.Component <any, any> {
       planData: {},
       knowledge: {},
       showCompleteModal: false,
+      showConfirmModal: false,
     }
   }
 
@@ -185,8 +186,20 @@ export class PlanMain extends React.Component <any, any> {
     })
   }
 
+  confirm() {
+    this.setState({ showCompleteModal: false, showConfirmModal: true })
+  }
+
   closeCompleteModal() {
     this.setState({ showCompleteModal: false })
+  }
+
+  closeConfirmModal() {
+    this.setState({ showConfirmModal: false })
+  }
+
+  problemReview(problemId){
+    this.context.router.push({ pathname: '/fragment/problem/report', query: { id: problemId } })
   }
 
   nextPlan() {
@@ -204,7 +217,7 @@ export class PlanMain extends React.Component <any, any> {
   }
 
   render() {
-    const { planData, showCompleteModal } = this.state
+    const { planData, showCompleteModal, showConfirmModal } = this.state
     const {
       problem = {}, practice, warmupComplete, applicationComplete, point, total,
       deadline, status, currentSeries, totalSeries, series
@@ -243,18 +256,39 @@ export class PlanMain extends React.Component <any, any> {
               <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal2.png"/>
               <div className="modal_context">
                 <div className="content">太棒了</div>
-                <div className="content">你已完成本专题全部必修训练</div>
+                <div className="content">你完成了本专题全部必做训练</div>
                 <div className="content2">
-                  获得了<span className="number">{point}</span>积分
+                  已得<span className="number">{point}</span>积分
                 </div>
-                <div className="content">本专题社区永久开放</div>
-                <div className="content">继续完成选做题</div>
-                <div className="content">拿更多积分</div>
                 {/**<div className="button">分享一下</div>**/}
-                <div className="button finished" onClick={this.nextPlan.bind(this)}>
-                  下一专题
+                <div className="modal-button-footer complete">
+                  <div className="left" onClick={this.confirm.bind(this)}>
+                    下一专题
+                  </div>
+                  <div className="right" onClick={this.closeCompleteModal.bind(this)}>留下复习
+                  </div>
                 </div>
-                <div className="button finished" onClick={this.closeCompleteModal.bind(this)}>关闭</div>
+              </div>
+            </div>
+          </div>
+          : null }
+        { showConfirmModal ?
+          <div className="mask">
+            <div className="finished_modal">
+              <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal2.png"/>
+              <div className="modal_context">
+                <div className="content">确定开始新专题吗</div>
+                <div className="content">当前专题的热身训练将无法查看</div>
+                <div className="content3">
+                  （PC端应用训练仍然开放）
+                </div>
+                {/**<div className="button">分享一下</div>**/}
+                <div className="modal-button-footer confirm">
+                  <div className="left" onClick={this.nextPlan.bind(this)}>
+                    确定
+                  </div>
+                  <div className="right" onClick={this.closeConfirmModal.bind(this)}>取消</div>
+                </div>
               </div>
             </div>
           </div>
@@ -264,18 +298,13 @@ export class PlanMain extends React.Component <any, any> {
             <div className="finished_modal">
               <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/expire_modal2.png"/>
               <div className="modal_context">
-                <div className="content">本专题的开放天数已用尽</div>
+                <div className="content">本专题已到期</div>
                 <div className="content2">
-                  你共完成了<span className="number">{warmupComplete}</span>个热身训练
+                  你完成了<span className="number">{warmupComplete}</span>个热身训练
                 </div>
                 <div className="content2">
-                  你共完成了<span className="number">{applicationComplete}</span>个应用训练
+                  已得<span className="number">{point}</span>积分
                 </div>
-                <div className="content2">
-                  获得了<span className="number">{point}</span>积分
-                </div>
-                <div className="content">本专题社区永久开放</div>
-                <div className="content">可登陆网站参与讨论</div>
                 {/**<div className="button">分享一下</div>**/}
                 <div className="button" onClick={this.nextPlan.bind(this)}>下一专题
                 </div>
@@ -296,6 +325,9 @@ export class PlanMain extends React.Component <any, any> {
             <div className="section">
               <label>总得分:</label> {point} 分
             </div>
+          </div>
+          <div className="problem-review" onClick={() => this.problemReview(problem.id)}>
+            本专题详情
           </div>
         </div>
         <div className="container has-footer"
