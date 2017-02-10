@@ -185,7 +185,7 @@ export class Analysis extends React.Component <any, any> {
     }
 
     const discussRender = (discuss, idx) => {
-      const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId} = discuss
+      const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId, repliedId} = discuss
       return (
         <div className="discuss-cell">
           <div className="discuss-avatar"><img src={avatar}/></div>
@@ -195,7 +195,7 @@ export class Analysis extends React.Component <any, any> {
                 {name}
               </div>
               <div className="discuss-replied-button"
-                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, comment})}>
+                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, repliedId})}>
                 回复
               </div>
             </div>
