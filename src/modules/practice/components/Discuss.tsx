@@ -52,7 +52,7 @@ export default class Discuss extends React.Component <any, any> {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="discuss-page">
           <textarea className="discuss-comment" cols="30" rows="10" height="500px" width="100%"
                     value={this.state.comment}
                     placeholder={this.state.repliedId?"解答同学的提问（限300字）":"分享你对本题的见解吧（限300字）"}
