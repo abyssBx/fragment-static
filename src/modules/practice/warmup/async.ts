@@ -23,3 +23,7 @@ export function loadWarmUpNext(id) {
 export function answer(params, practicePlanId) {
   return ppost(`/practice/warmup/answer/${practicePlanId}`, params)
 }
+
+export function discuss(params) {
+  return ppost(`/practice/discuss`, params)
+}

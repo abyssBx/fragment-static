@@ -37,6 +37,14 @@
       white-space: normal;
       word-break: break-all;
     }
+
+    .writeDiscuss {
+      position: absolute;
+      height:55px;
+      width:55px;
+      right:0;
+      top: 80%;
+    }
     > .choice-list {
       margin-left: 50px;
       margin-right: 50px;
@@ -116,6 +124,57 @@
         font-size: 13px;
         height: 30px;
         margin-top: 15px;
+      }
+    }
+    > .discuss {
+      margin-top: 25px;
+      > .discuss-title-bar {
+        background-color: #f5f5f5;
+        > .discuss-title {
+          font-size: 11px;
+        }
+      }
+      > .discuss-cell {
+        > .discuss-avatar {
+          display: inline-block;
+          margin-left: 15px;
+        }
+        > .discuss-area {
+          display: inline-block;
+          margin-left: 5px;
+          width:100%;
+          > .discuss-ceil{
+            > .discuss-name {
+              display: inline-block;
+              color: #666666;
+              font-size: 13px;
+            }
+            > .discuss-replied-button{
+              display: inline-block;
+              float: right;
+              margin-right: 15px;
+              color: #55cbcb;
+              font-size: 13px;
+            }
+          }
+          > .discuss-comment{
+            font-size: 13px;
+            margin-top:10px;
+          }
+          > .discuss-replied-comment{
+            font-size: 13px;
+            margin-top:10px;
+            color: #999999;
+          }
+          > .discuss-time{
+            font-size: 13px;
+            color: #999999;
+          }
+
+        }
+        > .discuss-hr{
+          border-top:1px solid #f5f5f5;
+        }
       }
     }
   }

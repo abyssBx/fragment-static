@@ -132,7 +132,32 @@ router.get("/practice/warmup/analysis/*", (req, res) => {
 								"isRight": false,
 								"selected": true
 							}
-						]
+						],
+            "discussList": [
+              {
+                "id":2,
+                "repliedId": 1,
+                "comment":"回复评论评论评论",
+                "repliedName": "风之伤",
+                "repliedComment": "评论评论评论",
+                "warmupPracticeId": 49,
+                "name":"Diane",
+                "avatar":"",
+                "discussTime":"10:30"
+              },
+
+              {
+                "id":1,
+                "repliedId": null,
+                "comment":"评论评论评论",
+                "repliedName": null,
+                "repliedComment": null,
+                "warmupPracticeId": 49,
+                "name":"风之伤",
+                "avatar":"",
+                "discussTime":"10:38"
+              }
+            ],
 					},
 					{
 						"id": 2, //题目id
@@ -241,6 +266,14 @@ router.get("/practice/challenge/start/*", (req, res) => {
 				"content": "balbal" //提交内容
 			}
 		}), Math.random() * 1500)
+});
+
+router.post("/practice/discuss", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json({
+      "code": 200,
+      "msg": "ok"
+    }), Math.random() * 1500)
 });
 
 module.exports = router;

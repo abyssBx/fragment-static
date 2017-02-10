@@ -1,12 +1,12 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { remove, set, merge } from "lodash";
+import {connect} from "react-redux";
 import "./Analysis.less";
-import { loadWarmUpAnalysis, loadKnowledgeIntro, loadWarmUpNext } from "./async";
-import { startLoad, endLoad, alertMsg } from "../../../redux/actions";
+import {loadWarmUpAnalysis, loadKnowledgeIntro, loadWarmUpNext} from "./async";
+import {startLoad, endLoad, alertMsg} from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 import AssetImg from "../../../components/AssetImg";
 import KnowledgeViewer from "../components/KnowledgeViewer";
+import Discuss from "../components/Discuss";
 
 const sequenceMap = {
   0: 'A',
@@ -28,6 +28,10 @@ export class Analysis extends React.Component <any, any> {
       practiceCount: 0,
       knowledge: {},
       showKnowledge: false,
+      showDiscuss: false,
+      repliedId: 0,
+      warmupPracticeId: 0,
+      pageIndex:1
     }
   }
 
@@ -42,14 +46,14 @@ export class Analysis extends React.Component <any, any> {
   }
 
   componentWillMount(props) {
-    const { dispatch, location } = props || this.props
-    this.setState({ currentIndex: 0 })
-    const { practicePlanId } = location.query
+    const {dispatch, location} = props || this.props
+    this.setState({currentIndex: 0})
+    const {practicePlanId} = location.query
     dispatch(startLoad())
     loadKnowledgeIntro(location.query.id).then(res => {
       dispatch(endLoad())
-      const { code, msg } = res
-      if (code === 200)  this.setState({ knowledge: msg })
+      const {code, msg} = res
+      if (code === 200) this.setState({knowledge: msg})
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
@@ -57,8 +61,8 @@ export class Analysis extends React.Component <any, any> {
     })
     loadWarmUpAnalysis(practicePlanId).then(res => {
       dispatch(endLoad())
-      const { code, msg } = res
-      if (code === 200)  this.setState({ list: msg, practiceCount: msg.practice.length })
+      const {code, msg} = res
+      if (code === 200) this.setState({list: msg, practiceCount: msg.practice.length})
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
@@ -67,31 +71,31 @@ export class Analysis extends React.Component <any, any> {
   }
 
   next() {
-    const { dispatch } = this.props
-    const { currentIndex, practiceCount } = this.state
+    const {dispatch} = this.props
+    const {currentIndex, practiceCount} = this.state
     if (currentIndex < practiceCount - 1) {
-      this.setState({ currentIndex: currentIndex + 1 })
+      this.setState({currentIndex: currentIndex + 1})
     }
   }
 
   prev() {
-    const { dispatch } = this.props
-    const { currentIndex } = this.state
+    const {dispatch} = this.props
+    const {currentIndex} = this.state
     if (currentIndex > 0) {
-      this.setState({ currentIndex: currentIndex - 1 })
+      this.setState({currentIndex: currentIndex - 1})
     }
   }
 
   nextTask() {
-    const { dispatch } = this.props
-    const { series, practicePlanId } = this.props.location.query
+    const {dispatch} = this.props
+    const {series, practicePlanId} = this.props.location.query
     dispatch(startLoad())
     loadWarmUpNext(practicePlanId).then(res => {
       dispatch(endLoad())
-      const { code, msg } = res
+      const {code, msg} = res
       if (code === 200) {
         const item = msg
-        const { type, practicePlanId, knowledge, unlocked } = item
+        const {type, practicePlanId, knowledge, unlocked} = item
         if (!unlocked) {
           dispatch(alertMsg("该训练尚未解锁"))
           return
@@ -100,30 +104,30 @@ export class Analysis extends React.Component <any, any> {
           if (item.status === 1) {
             this.context.router.push({
               pathname: '/fragment/practice/warmup/analysis',
-              query: { practicePlanId, id: knowledge.id, series }
+              query: {practicePlanId, id: knowledge.id, series}
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/intro',
-                query: { practicePlanId, id: knowledge.id, series }
+                query: {practicePlanId, id: knowledge.id, series}
               })
             } else {
               this.context.router.push({
                 pathname: '/fragment/practice/warmup/ready',
-                query: { practicePlanId, id: knowledge.id, series }
+                query: {practicePlanId, id: knowledge.id, series}
               })
             }
           }
         } else if (type === 11) {
           this.context.router.push({
             pathname: '/fragment/practice/application',
-            query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
+            query: {appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId}
           })
         } else if (type === 21) {
           this.context.router.push({
             pathname: '/fragment/practice/challenge',
-            query: { id: item.practiceIdList[0], series, practicePlanId }
+            query: {id: item.practiceIdList[0], series, practicePlanId}
           })
         }
       } else {
@@ -133,25 +137,30 @@ export class Analysis extends React.Component <any, any> {
   }
 
   closeModal() {
-    this.setState({ showKnowledge: false })
+    this.setState({showKnowledge: false})
+  }
+
+  closeDiscussModal() {
+    this.setState({showDiscuss: false})
   }
 
   render() {
-    const { list, currentIndex, selected, knowledge, practiceCount, showKnowledge } = this.state
-    const { practice = [] } = list
-    const { analysis, means, keynote, voice } = knowledge
+    const {list, currentIndex, selected, knowledge, practiceCount,
+      showKnowledge, showDiscuss, repliedId, warmupPracticeId} = this.state
+    const {practice = []} = list
+    const {analysis, means, keynote, voice} = knowledge
 
     const questionRender = (practice) => {
-      const { question, voice, analysis, choiceList = [], score = 0 } = practice
+      const {question, voice, analysis, choiceList = [], score = 0, discussList = []} = practice
       return (
         <div className="intro-container">
           { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
-            <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
-            <span className="type"><span className="number">{score}</span>分</span>
-          </div> : null}
+              <span className="index">第{currentIndex + 1}/{practiceCount}题</span>
+              <span className="type"><span className="number">{score}</span>分</span>
+            </div> : null}
           { voice ? <div className="context-audio">
-            <Audio url={voice}/>
-          </div> : null }
+              <Audio url={voice}/>
+            </div> : null }
           <div className="question">
             <div dangerouslySetInnerHTML={{__html: question}}></div>
           </div>
@@ -164,12 +173,44 @@ export class Analysis extends React.Component <any, any> {
                  dangerouslySetInnerHTML={{__html: practice ? practice.analysis : ''}}></div>
             <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
           </div>
+          <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true})}>
+            <AssetImg type="discuss" width={30} height={30}></AssetImg>
+          </div>
+          <div className="discuss">
+            <div className="discuss-title-bar"><span className="discuss-title">讨论区</span></div>
+            {discussList.map((discuss, idx) => discussRender(discuss, idx))}
+          </div>
+        </div>
+      )
+    }
+
+    const discussRender = (discuss, idx) => {
+      const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId} = discuss
+      return (
+        <div className="discuss-cell">
+          <div className="discuss-avatar"><img src={avatar}/></div>
+          <div className="discuss-area">
+            <div className="discuss-ceil">
+              <div className="discuss-name">
+                {name}
+              </div>
+              <div className="discuss-replied-button"
+                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, comment})}>
+                回复
+              </div>
+            </div>
+            <div className="discuss-comment">{comment}</div>
+            {repliedComment ?
+              <div className="discuss-replied-comment">{'//'}{repliedName}:{repliedComment}</div> : null}
+            <div className="discuss-time">{discussTime}</div>
+          </div>
+          <hr className="discuss-hr"/>
         </div>
       )
     }
 
     const choiceRender = (choice, idx) => {
-      const { id, subject } = choice
+      const {id, subject} = choice
       return (
         <div key={id} className={`choice${choice.selected ? ' selected' : ''}`}>
           <span className={`index${choice.isRight ? ' right' : ' wrong'}`}>
@@ -192,11 +233,13 @@ export class Analysis extends React.Component <any, any> {
         <div className="button-footer">
           <div className={`left ${currentIndex === 0 ? ' disabled' : ''}`} onClick={this.prev.bind(this)}>上一题</div>
           {currentIndex + 1 < practiceCount ?
-          <div className={`right`} onClick={this.next.bind(this)}>下一题</div> :
-          <div className="right" onClick={this.nextTask.bind(this)}>继续训练</div>}
+            <div className={`right`} onClick={this.next.bind(this)}>下一题</div> :
+            <div className="right" onClick={this.nextTask.bind(this)}>继续训练</div>}
         </div>
 
         {showKnowledge ? <KnowledgeViewer knowledge={knowledge} closeModal={this.closeModal.bind(this)}/> : null}
+        {showDiscuss ?<Discuss repliedId={repliedId} warmupPracticeId={warmupPracticeId}
+                               closeModal={this.closeDiscussModal.bind(this)}/> : null}
       </div>
     )
   }
