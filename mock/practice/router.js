@@ -142,7 +142,7 @@ router.get("/practice/warmup/analysis/*", (req, res) => {
                 "repliedComment": "评论评论评论",
                 "warmupPracticeId": 49,
                 "name":"Diane",
-                "avatar":"",
+                "avatar":"http://wx.qlogo.cn/mmopen/Q3auHgzwzM4j579r72ltlZK0uBEz3klv57pOrqolSjZONIIlyffo4ib5p7sneIH4MgXyCKzKOKBiaCTkQUyu15XKiaeSppaJ0U3j1OBLIOrxrk/0",
                 "discussTime":"10:30"
               },
 
@@ -154,7 +154,7 @@ router.get("/practice/warmup/analysis/*", (req, res) => {
                 "repliedComment": null,
                 "warmupPracticeId": 49,
                 "name":"风之伤",
-                "avatar":"",
+                "avatar":"http://wx.qlogo.cn/mmopen/Q3auHgzwzM4j579r72ltlZK0uBEz3klv57pOrqolSjZONIIlyffo4ib5p7sneIH4MgXyCKzKOKBiaCTkQUyu15XKiaeSppaJ0U3j1OBLIOrxrk/0",
                 "discussTime":"10:38"
               }
             ],

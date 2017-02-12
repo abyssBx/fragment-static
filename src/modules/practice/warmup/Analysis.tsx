@@ -173,7 +173,7 @@ export class Analysis extends React.Component <any, any> {
                  dangerouslySetInnerHTML={{__html: practice ? practice.analysis : ''}}></div>
             <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
           </div>
-          <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true})}>
+          <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true, warmupPracticeId})}>
             <AssetImg type="discuss" width={30} height={30}></AssetImg>
           </div>
           <div className="discuss">
@@ -188,7 +188,7 @@ export class Analysis extends React.Component <any, any> {
       const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId, repliedId} = discuss
       return (
         <div className="discuss-cell">
-          <div className="discuss-avatar"><img src={avatar}/></div>
+          <div className="discuss-avatar"><img className="discuss-avatar-img" src={avatar} /></div>
           <div className="discuss-area">
             <div className="discuss-ceil">
               <div className="discuss-name">

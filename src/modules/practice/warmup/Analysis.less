@@ -137,12 +137,20 @@
       > .discuss-cell {
         > .discuss-avatar {
           display: inline-block;
-          margin-left: 15px;
+          vertical-align: top;
+          height:30px;
+          width:30px;
+          border-radius: 15px;
+          margin-top: 10px;
+          > .discuss-avatar-img{
+            height:30px;
+            width:30px;
+          }
         }
         > .discuss-area {
           display: inline-block;
           margin-left: 5px;
-          width:100%;
+          width: ~"calc(100% - 30px - 5px)";
           > .discuss-ceil{
             > .discuss-name {
               display: inline-block;
