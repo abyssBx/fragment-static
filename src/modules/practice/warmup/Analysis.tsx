@@ -146,12 +146,12 @@ export class Analysis extends React.Component <any, any> {
 
   render() {
     const {list, currentIndex, selected, knowledge, practiceCount,
-      showKnowledge, showDiscuss, repliedId, warmupPracticeId} = this.state
+      showKnowledge, showDiscuss, repliedId} = this.state
     const {practice = []} = list
     const {analysis, means, keynote, voice} = knowledge
 
     const questionRender = (practice) => {
-      const {question, voice, analysis, choiceList = [], score = 0, discussList = []} = practice
+      const {id, question, voice, analysis, choiceList = [], score = 0, discussList = []} = practice
       return (
         <div className="intro-container">
           { practiceCount !== 0 && currentIndex <= practiceCount - 1 ? <div className="intro-index">
@@ -173,7 +173,7 @@ export class Analysis extends React.Component <any, any> {
                  dangerouslySetInnerHTML={{__html: practice ? practice.analysis : ''}}></div>
             <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
           </div>
-          <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true, warmupPracticeId})}>
+          <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true, warmupPracticeId: id, repliedId:0})}>
             <AssetImg type="discuss" width={30} height={30}></AssetImg>
           </div>
           <div className="discuss">
@@ -185,7 +185,7 @@ export class Analysis extends React.Component <any, any> {
     }
 
     const discussRender = (discuss, idx) => {
-      const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId, repliedId} = discuss
+      const {id, name, avatar, comment, discussTime, repliedName, repliedComment, warmupPracticeId} = discuss
       return (
         <div className="discuss-cell">
           <div className="discuss-avatar"><img className="discuss-avatar-img" src={avatar} /></div>
@@ -195,7 +195,7 @@ export class Analysis extends React.Component <any, any> {
                 {name}
               </div>
               <div className="discuss-replied-button"
-                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, repliedId})}>
+                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, repliedId:id})}>
                 回复
               </div>
             </div>
@@ -238,7 +238,7 @@ export class Analysis extends React.Component <any, any> {
         </div>
 
         {showKnowledge ? <KnowledgeViewer knowledge={knowledge} closeModal={this.closeModal.bind(this)}/> : null}
-        {showDiscuss ?<Discuss repliedId={repliedId} warmupPracticeId={warmupPracticeId}
+        {showDiscuss ?<Discuss repliedId={repliedId} warmupPracticeId={this.state.warmupPracticeId}
                                closeModal={this.closeDiscussModal.bind(this)}/> : null}
       </div>
     )
