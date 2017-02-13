@@ -47,7 +47,7 @@ export class Main extends React.Component <any, any> {
 
   onSubmit() {
     this.context.router.push({
-      pathname: '/fragment/plan/main',
+      pathname: '/fragment/static/plan/main',
       query: { series: this.props.location.query.series }
     })
   }

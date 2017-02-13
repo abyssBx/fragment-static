@@ -1,13 +1,13 @@
 import { pget } from "utils/request";
 
 export function loadKnowledgeIntro(knowledgeId) {
-  return pget(`/plan/knowledge/load/${knowledgeId}`)
+  return pget(`/fragment/plan/knowledge/load/${knowledgeId}`)
 }
 
 export function loadChallengePractice(id) {
-  return pget(`/practice/challenge/start/${id}`)
+  return pget(`/fragment/practice/challenge/start/${id}`)
 }
 
 export function loadWarmUpNext(id) {
-  return pget(`/practice/next/${id}`)
+  return pget(`/fragment/practice/next/${id}`)
 }

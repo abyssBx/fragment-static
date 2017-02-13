@@ -43,7 +43,7 @@ export class ProblemPriority extends React.Component <any, any> {
       const { code, msg } = res
       if (code === 200) {
         if (!msg.problemList.length || msg.problemList.length === 0) {
-          this.context.router.push({ pathname: '/fragment/problem/list' })
+          this.context.router.push({ pathname: '/fragment/static/problem/list' })
         } else {
           if(msg.problemList.length === 1){
             this.setState({problemList:msg.problemList,problemSelected:msg.problemList[0].problemId})
@@ -67,7 +67,7 @@ export class ProblemPriority extends React.Component <any, any> {
   onSubmit() {
     const { location } = this.props
     const { id } = location.query
-    this.context.router.push({ pathname: '/fragment/problem/report', query: { id: this.state.problemSelected } })
+    this.context.router.push({ pathname: '/fragment/static/problem/report', query: { id: this.state.problemSelected } })
   }
 
   show() {

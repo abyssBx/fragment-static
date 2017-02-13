@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.get("/practice/warmup/start/*", (req, res) => {
+router.get("/fragment/practice/warmup/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -86,7 +86,7 @@ router.get("/practice/warmup/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/warmup/analysis/*", (req, res) => {
+router.get("/fragment/practice/warmup/analysis/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -206,7 +206,7 @@ router.get("/practice/warmup/analysis/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/practice/warmup/answer/*", (req, res) => {
+router.post("/fragment/practice/warmup/answer/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -217,7 +217,7 @@ router.post("/practice/warmup/answer/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/next/*", (req, res) => {
+router.get("/fragment/practice/next/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -237,7 +237,7 @@ router.get("/practice/next/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/application/start/*", (req, res) => {
+router.get("/fragment/practice/application/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -252,7 +252,7 @@ router.get("/practice/application/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/practice/challenge/start/*", (req, res) => {
+router.get("/fragment/practice/challenge/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -268,11 +268,43 @@ router.get("/practice/challenge/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/practice/discuss", (req, res) => {
+router.post("/fragment/practice/discuss", (req, res) => {
   setTimeout(() =>
     res.status(200).json({
       "code": 200,
       "msg": "ok"
+    }), Math.random() * 1500)
+});
+
+router.get("/fragment/practice/load/discuss/*/*", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json({
+      "code": 200,
+      "msg": [
+        {
+          "id":2,
+          "repliedId": 1,
+          "comment":"新增的评论",
+          "repliedName": "风之伤",
+          "repliedComment": "评论评论评论",
+          "warmupPracticeId": 49,
+          "name":"Diane",
+          "avatar":"http://wx.qlogo.cn/mmopen/Q3auHgzwzM4j579r72ltlZK0uBEz3klv57pOrqolSjZONIIlyffo4ib5p7sneIH4MgXyCKzKOKBiaCTkQUyu15XKiaeSppaJ0U3j1OBLIOrxrk/0",
+          "discussTime":"10:30"
+        },
+
+        {
+          "id":1,
+          "repliedId": null,
+          "comment":"评论评论评论",
+          "repliedName": null,
+          "repliedComment": null,
+          "warmupPracticeId": 49,
+          "name":"风之伤",
+          "avatar":"http://wx.qlogo.cn/mmopen/Q3auHgzwzM4j579r72ltlZK0uBEz3klv57pOrqolSjZONIIlyffo4ib5p7sneIH4MgXyCKzKOKBiaCTkQUyu15XKiaeSppaJ0U3j1OBLIOrxrk/0",
+          "discussTime":"10:38"
+        }
+      ]
     }), Math.random() * 1500)
 });
 

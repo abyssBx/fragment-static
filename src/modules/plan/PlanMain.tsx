@@ -83,7 +83,7 @@ export class PlanMain extends React.Component <any, any> {
             }
           } else {
             this.context.router.push({
-              pathname: '/fragment/problem/priority'
+              pathname: '/fragment/static/problem/priority'
             })
           }
         }
@@ -108,25 +108,25 @@ export class PlanMain extends React.Component <any, any> {
     if (type === 1 || type === 2) {
       if (item.status === 1) {
         this.context.router.push({
-          pathname: '/fragment/practice/warmup/analysis',
+          pathname: '/fragment/static/practice/warmup/analysis',
           query: { practicePlanId, id: knowledge.id, series }
         })
       } else {
         if (!knowledge.appear) {
           this.context.router.push({
-            pathname: '/fragment/practice/warmup/intro',
+            pathname: '/fragment/static/practice/warmup/intro',
             query: { practicePlanId, id: knowledge.id, series }
           })
         } else {
           this.context.router.push({
-            pathname: '/fragment/practice/warmup/ready',
+            pathname: '/fragment/static/practice/warmup/ready',
             query: { practicePlanId, id: knowledge.id, series }
           })
         }
       }
     } else if (type === 11) {
       this.context.router.push({
-        pathname: '/fragment/practice/application',
+        pathname: '/fragment/static/practice/application',
         query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
       })
     } else if (type === 21) {
@@ -199,7 +199,7 @@ export class PlanMain extends React.Component <any, any> {
   }
 
   problemReview(problemId){
-    this.context.router.push({ pathname: '/fragment/problem/report', query: { id: problemId } })
+    this.context.router.push({ pathname: '/fragment/static/problem/report', query: { id: problemId } })
   }
 
   nextPlan() {
@@ -209,7 +209,7 @@ export class PlanMain extends React.Component <any, any> {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
-        this.context.router.push("/fragment/problem/priority")
+        this.context.router.push("/fragment/static/problem/priority")
       } else {
         dispatch(alertMsg(msg))
       }

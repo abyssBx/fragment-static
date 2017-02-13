@@ -1,29 +1,33 @@
 import { pget, ppost } from "utils/request";
 
 export function loadKnowledgeIntro(knowledgeId) {
-  return pget(`/plan/knowledge/load/${knowledgeId}`)
+  return pget(`/fragment/plan/knowledge/load/${knowledgeId}`)
 }
 
 export function learnKnowledge(knowledgeId) {
-  return ppost(`/plan/knowledge/learn/${knowledgeId}`)
+  return ppost(`/fragment/plan/knowledge/learn/${knowledgeId}`)
 }
 
 export function loadWarmUpPractice(practicePlanId) {
-  return pget(`/practice/warmup/start/${practicePlanId}`)
+  return pget(`/fragment/practice/warmup/start/${practicePlanId}`)
 }
 
 export function loadWarmUpAnalysis(practicePlanId) {
-  return pget(`/practice/warmup/analysis/${practicePlanId}`)
+  return pget(`/fragment/practice/warmup/analysis/${practicePlanId}`)
 }
 
 export function loadWarmUpNext(id) {
-  return pget(`/practice/next/${id}`)
+  return pget(`/fragment/practice/next/${id}`)
 }
 
 export function answer(params, practicePlanId) {
-  return ppost(`/practice/warmup/answer/${practicePlanId}`, params)
+  return ppost(`/fragment/practice/warmup/answer/${practicePlanId}`, params)
 }
 
 export function discuss(params) {
-  return ppost(`/practice/discuss`, params)
+  return ppost(`/fragment/practice/discuss`, params)
+}
+
+export function loadWarmUpDiscuss(id, offset) {
+  return pget(`/fragment/practice/load/discuss/${id}/${offset}`)
 }

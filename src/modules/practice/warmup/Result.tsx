@@ -32,7 +32,7 @@ export class Result extends React.Component <any, any> {
   }
 
   onSubmit() {
-    this.context.router.push({ pathname: '/fragment/practice/warmup/analysis', query: this.props.location.query })
+    this.context.router.push({ pathname: '/fragment/static/practice/warmup/analysis', query: this.props.location.query })
   }
 
   nextTask() {
@@ -52,30 +52,30 @@ export class Result extends React.Component <any, any> {
         if (type === 1 || type === 2) {
           if (item.status === 1) {
             this.context.router.push({
-              pathname: '/fragment/practice/warmup/analysis',
+              pathname: '/fragment/static/practice/warmup/analysis',
               query: { practicePlanId, id: knowledge.id, series }
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
-                pathname: '/fragment/practice/warmup/intro',
+                pathname: '/fragment/static/practice/warmup/intro',
                 query: { practicePlanId, id: knowledge.id, series }
               })
             } else {
               this.context.router.push({
-                pathname: '/fragment/practice/warmup/ready',
+                pathname: '/fragment/static/practice/warmup/ready',
                 query: { practicePlanId, id: knowledge.id, series }
               })
             }
           }
         } else if (type === 11) {
           this.context.router.push({
-            pathname: '/fragment/practice/application',
+            pathname: '/fragment/static/practice/application',
             query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
           })
         } else if (type === 21) {
           this.context.router.push({
-            pathname: '/fragment/practice/challenge',
+            pathname: '/fragment/static/practice/challenge',
             query: { id: item.practiceIdList[0], series, practicePlanId }
           })
         }

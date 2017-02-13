@@ -34,7 +34,7 @@ export class PlanIntro extends React.Component <any, any> {
   }
 
   onSubmit() {
-    this.context.router.push({ pathname: '/fragment/plan/main' })
+    this.context.router.push({ pathname: '/fragment/static/plan/main' })
   }
 
   render() {

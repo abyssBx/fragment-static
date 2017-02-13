@@ -1,12 +1,13 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import "./Analysis.less";
-import {loadWarmUpAnalysis, loadKnowledgeIntro, loadWarmUpNext} from "./async";
+import {loadWarmUpAnalysis, loadKnowledgeIntro, loadWarmUpNext, loadWarmUpDiscuss} from "./async";
 import {startLoad, endLoad, alertMsg} from "../../../redux/actions";
 import Audio from "../../../components/Audio";
 import AssetImg from "../../../components/AssetImg";
 import KnowledgeViewer from "../components/KnowledgeViewer";
 import Discuss from "../components/Discuss";
+import {set} from "lodash"
 
 const sequenceMap = {
   0: 'A',
@@ -31,7 +32,7 @@ export class Analysis extends React.Component <any, any> {
       showDiscuss: false,
       repliedId: 0,
       warmupPracticeId: 0,
-      pageIndex:1
+      pageIndex:1,
     }
   }
 
@@ -103,30 +104,30 @@ export class Analysis extends React.Component <any, any> {
         if (type === 1 || type === 2) {
           if (item.status === 1) {
             this.context.router.push({
-              pathname: '/fragment/practice/warmup/analysis',
+              pathname: '/fragment/static/practice/warmup/analysis',
               query: {practicePlanId, id: knowledge.id, series}
             })
           } else {
             if (!knowledge.appear) {
               this.context.router.push({
-                pathname: '/fragment/practice/warmup/intro',
+                pathname: '/fragment/static/practice/warmup/intro',
                 query: {practicePlanId, id: knowledge.id, series}
               })
             } else {
               this.context.router.push({
-                pathname: '/fragment/practice/warmup/ready',
+                pathname: '/fragment/static/practice/warmup/ready',
                 query: {practicePlanId, id: knowledge.id, series}
               })
             }
           }
         } else if (type === 11) {
           this.context.router.push({
-            pathname: '/fragment/practice/application',
+            pathname: '/fragment/static/practice/application',
             query: {appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId}
           })
         } else if (type === 21) {
           this.context.router.push({
-            pathname: '/fragment/practice/challenge',
+            pathname: '/fragment/static/practice/challenge',
             query: {id: item.practiceIdList[0], series, practicePlanId}
           })
         }
@@ -141,7 +142,25 @@ export class Analysis extends React.Component <any, any> {
   }
 
   closeDiscussModal() {
-    this.setState({showDiscuss: false})
+    const {dispatch} = this.props
+    let {list, currentIndex} = this.state
+    const {practice = []} = list
+    const {id} = practice[currentIndex]
+
+    let discussList = []
+    loadWarmUpDiscuss(id, 1).then(res => {
+      dispatch(endLoad())
+      const {code, msg} = res
+      if (code === 200) {
+        set(list, `practice.${currentIndex}.discussList`, msg)
+        this.setState({showDiscuss: false, list})
+      }
+      else dispatch(alertMsg(msg))
+    }).catch(ex => {
+      dispatch(endLoad())
+      dispatch(alertMsg(ex))
+    })
+
   }
 
   render() {
