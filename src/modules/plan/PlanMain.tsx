@@ -83,7 +83,7 @@ export class PlanMain extends React.Component <any, any> {
             }
           } else {
             this.context.router.push({
-              pathname: '/fragment/static/problem/priority'
+              pathname: '/rise/static/problem/priority'
             })
           }
         }
@@ -108,30 +108,30 @@ export class PlanMain extends React.Component <any, any> {
     if (type === 1 || type === 2) {
       if (item.status === 1) {
         this.context.router.push({
-          pathname: '/fragment/static/practice/warmup/analysis',
+          pathname: '/rise/static/practice/warmup/analysis',
           query: { practicePlanId, id: knowledge.id, series }
         })
       } else {
         if (!knowledge.appear) {
           this.context.router.push({
-            pathname: '/fragment/static/practice/warmup/intro',
+            pathname: '/rise/static/practice/warmup/intro',
             query: { practicePlanId, id: knowledge.id, series }
           })
         } else {
           this.context.router.push({
-            pathname: '/fragment/static/practice/warmup/ready',
+            pathname: '/rise/static/practice/warmup/ready',
             query: { practicePlanId, id: knowledge.id, series }
           })
         }
       }
     } else if (type === 11) {
       this.context.router.push({
-        pathname: '/fragment/static/practice/application',
+        pathname: '/rise/static/practice/application',
         query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
       })
     } else if (type === 21) {
       this.context.router.push({
-        pathname: '/fragment/practice/challenge',
+        pathname: '/rise/practice/challenge',
         query: { id: item.practiceIdList[0], series, practicePlanId }
       })
     }
@@ -199,7 +199,7 @@ export class PlanMain extends React.Component <any, any> {
   }
 
   problemReview(problemId){
-    this.context.router.push({ pathname: '/fragment/static/problem/report', query: { id: problemId } })
+    this.context.router.push({ pathname: '/rise/static/problem/report', query: { id: problemId } })
   }
 
   nextPlan() {
@@ -209,7 +209,7 @@ export class PlanMain extends React.Component <any, any> {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
-        this.context.router.push("/fragment/static/problem/priority")
+        this.context.router.push("/rise/static/problem/priority")
       } else {
         dispatch(alertMsg(msg))
       }

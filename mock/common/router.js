@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.post("/fragment/b/log", (req, res) => {
+router.post("/rise/b/log", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -16,7 +16,7 @@ router.post("/fragment/b/log", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/wx/js/signature", (req, res) => {
+router.get("/rise/wx/js/signature", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,

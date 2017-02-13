@@ -37,7 +37,7 @@ export class Intro extends React.Component <any, any> {
   }
 
   onSubmit() {
-    this.context.router.push({ pathname: '/fragment/static/practice/warmup', query: this.props.location.query })
+    this.context.router.push({ pathname: '/rise/static/practice/warmup', query: this.props.location.query })
   }
 
   render() {

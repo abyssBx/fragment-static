@@ -35,7 +35,7 @@ export class ProblemReport extends React.Component <any, any> {
     createPlan(this.props.location.query.id).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.context.router.push({ pathname: '/fragment/static/plan/intro', query: { id: msg } })
+      if (code === 200)  this.context.router.push({ pathname: '/rise/static/plan/intro', query: { id: msg } })
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())

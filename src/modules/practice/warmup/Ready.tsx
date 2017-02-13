@@ -53,14 +53,14 @@ export class Ready extends React.Component <any, any> {
             <div className="choice-list">
               <div className="choice review"
                    onClick={() => this.context.router.push({
-                     pathname: '/fragment/static/practice/warmup/intro',
+                     pathname: '/rise/static/practice/warmup/intro',
                      query: this.props.location.query
                    })}>
                 知识点
               </div>
               <div className="choice start"
                    onClick={() => this.context.router.push({
-                     pathname: '/fragment/static/practice/warmup',
+                     pathname: '/rise/static/practice/warmup',
                      query: this.props.location.query
                    })}>
                 开始训练

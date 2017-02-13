@@ -1,29 +1,29 @@
 import { pget, ppost } from "utils/request";
 
 export function loadPlan() {
-  return pget(`/fragment/plan/load`)
+  return pget(`/rise/plan/load`)
 }
 
 export function loadPlanHistory(series) {
-  return pget(`/fragment/plan/history/load/${series}`)
+  return pget(`/rise/plan/history/load/${series}`)
 }
 
 export function loadPlanIntro(planId) {
-  return pget(`/fragment/plan/play/${planId}`)
+  return pget(`/rise/plan/play/${planId}`)
 }
 
 export function submitProblemList(params) {
-  return ppost(`/fragment/problem/select`, params)
+  return ppost(`/rise/problem/select`, params)
 }
 
 export function loadWarmUpNext(id) {
-  return pget(`/fragment/practice/next/${id}`)
+  return pget(`/rise/practice/next/${id}`)
 }
 
 export function completePlan() {
-  return ppost(`/fragment/plan/complete`)
+  return ppost(`/rise/plan/complete`)
 }
 
 export function closePlan() {
-  return ppost(`/fragment/plan/close`)
+  return ppost(`/rise/plan/close`)
 }

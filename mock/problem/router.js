@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.get("/fragment/problem/load", (req, res) => {
+router.get("//rise/problem/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -22,7 +22,7 @@ router.get("/fragment/problem/load", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/fragment/problem/select", (req, res) => {
+router.post("//rise/problem/select", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -30,7 +30,7 @@ router.post("/fragment/problem/select", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/problem/load/mine", (req, res) => {
+router.get("//rise/problem/load/mine", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -51,7 +51,7 @@ router.get("/fragment/problem/load/mine", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/problem/get/*", (req, res) => {
+router.get("//rise/problem/get/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,

@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.post("/fragment/plan/choose/problem/*", (req, res) => {
+router.post("/rise/plan/choose/problem/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -10,7 +10,7 @@ router.post("/fragment/plan/choose/problem/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/plan/play/*", (req, res) => {
+router.get("/rise/plan/play/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -22,7 +22,7 @@ router.get("/fragment/plan/play/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/plan/load", (req, res) => {
+router.get("/rise/plan/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -119,7 +119,7 @@ router.get("/fragment/plan/load", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/plan/history/load/*", (req, res) => {
+router.get("/rise/plan/history/load/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -216,7 +216,7 @@ router.get("/fragment/plan/history/load/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("/fragment/plan/knowledge/load/*", (req, res) => {
+router.get("/rise/plan/knowledge/load/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -232,7 +232,7 @@ router.get("/fragment/plan/knowledge/load/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/fragment/plan/knowledge/learn/*", (req, res) => {
+router.post("/rise/plan/knowledge/learn/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -240,7 +240,7 @@ router.post("/fragment/plan/knowledge/learn/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/fragment/plan/complete", (req, res) => {
+router.post("/rise/plan/complete", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -248,7 +248,7 @@ router.post("/fragment/plan/complete", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("/fragment/plan/close", (req, res) => {
+router.post("/rise/plan/close", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,

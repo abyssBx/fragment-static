@@ -15,7 +15,7 @@ import { Main as Application } from "modules/practice/application/Main";
 import { Main as Challenge } from "modules/practice/challenge/Main";
 
 const routes = (
-  <Route path="/fragment/static" component={Base}>
+  <Route path="/rise/static" component={Base}>
     <Route path="problem/list" component={ProblemList}/>
     <Route path="problem/priority" component={ProblemPriority}/>
     <Route path="problem/report" component={ProblemReport}/>
