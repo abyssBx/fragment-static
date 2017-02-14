@@ -46,12 +46,12 @@ export class PlanMain extends React.Component <any, any> {
         if (code === 200) {
           if (msg !== null) {
             this.setState({ planData: msg })
-            if (msg.summary) {
-              dispatch(alertMsg(<div>
-                <p>很好！你已完成这组训练。</p>
-                <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
-              </div>))
-            }
+            // if (msg.summary) {
+            //   dispatch(alertMsg(<div>
+            //     <p>很好！你已完成这组训练。</p>
+            //     <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
+            //   </div>))
+            // }
           } else {
             this.context.router.push({ pathname: location.pathname })
             dispatch(alertMsg("下一组任务明早6点解锁"))
@@ -75,12 +75,12 @@ export class PlanMain extends React.Component <any, any> {
         if (code === 200) {
           if (msg !== null) {
             this.setState({ planData: msg })
-            if (msg.summary) {
-              dispatch(alertMsg(<div>
-                <p>很好！你已完成这组训练。</p>
-                <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
-              </div>))
-            }
+            // if (msg.summary) {
+            //   dispatch(alertMsg(<div>
+            //     <p>很好！你已完成这组训练。</p>
+            //     <p>对实践应用或解决问题有心得？及时记录在挑战任务中。</p>
+            //   </div>))
+            // }
           } else {
             this.context.router.push({
               pathname: '/rise/static/problem/priority'
@@ -255,8 +255,10 @@ export class PlanMain extends React.Component <any, any> {
             <div className="finished_modal">
               <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal2.png"/>
               <div className="modal_context">
-                <div className="content">太棒了</div>
-                <div className="content">你完成了本专题全部必做训练</div>
+                <div className="content">
+                  <div className="text2">太棒了!</div>
+                  <div className="text">你完成了本专题全部必做训练</div>
+                </div>
                 <div className="content2">
                   已得<span className="number">{point}</span>积分
                 </div>
@@ -265,7 +267,7 @@ export class PlanMain extends React.Component <any, any> {
                   <div className="left" onClick={this.confirm.bind(this)}>
                     下一专题
                   </div>
-                  <div className="right" onClick={this.closeCompleteModal.bind(this)}>留下复习
+                  <div className="right" onClick={this.closeCompleteModal.bind(this)}>取消
                   </div>
                 </div>
               </div>
@@ -277,10 +279,12 @@ export class PlanMain extends React.Component <any, any> {
             <div className="finished_modal">
               <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/finish_modal2.png"/>
               <div className="modal_context">
-                <div className="content">确定开始新专题吗</div>
-                <div className="content">当前专题的热身训练将无法查看</div>
+                <div className="content">
+                  <div className="text">确定开始新专题吗</div>
+                  <div className="text">当前专题的热身训练将无法查看</div>
+                </div>
                 <div className="content2">
-                  （PC端应用训练仍然开放）
+                  <div className="text">（PC端应用训练仍然开放）</div>
                 </div>
                 {/**<div className="button">分享一下</div>**/}
                 <div className="modal-button-footer confirm">
@@ -298,16 +302,15 @@ export class PlanMain extends React.Component <any, any> {
             <div className="finished_modal">
               <AssetImg width={290} height={410} url="http://www.iquanwai.com/images/fragment/expire_modal2.png"/>
               <div className="modal_context">
-                <div className="content">本专题已到期</div>
-                <div className="content">
-                  你完成了<span className="number">{warmupComplete}</span>个热身训练
-                </div>
+                <div className="content"><div className="text">本专题已到期</div></div>
                 <div className="content2">
-                  已得<span className="number">{point}</span>积分
+                  <div className="text">登录</div>
+                  <div className="text">www.iquanwai.com/community</div>
+                  <div className="text">可继续完成专题/应用训练</div>
                 </div>
                 {/**<div className="button">分享一下</div>**/}
                 <div className="modal-button-footer complete">
-                  <div className="button" onClick={this.nextPlan.bind(this)}>下一专题
+                  <div className="button" onClick={this.nextPlan.bind(this)}>开始新专题
                   </div>
                 </div>
               </div>
