@@ -161,6 +161,8 @@ export class Analysis extends React.Component <any, any> {
       dispatch(alertMsg(ex))
     })
 
+    window.location.href = '#discuss'
+
   }
 
   render() {
@@ -193,9 +195,10 @@ export class Analysis extends React.Component <any, any> {
             <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
           </div>
           <div className="writeDiscuss" onClick={() => this.setState({showDiscuss: true, warmupPracticeId: id, repliedId:0})}>
-            <AssetImg type="discuss" width={30} height={30}></AssetImg>
+            <AssetImg type="discuss" width={45} height={45}></AssetImg>
           </div>
           <div className="discuss">
+            <a name="discuss"/>
             <div className="discuss-title-bar"><span className="discuss-title">讨论区</span></div>
             {discussList.map((discuss, idx) => discussRender(discuss, idx))}
           </div>
@@ -220,7 +223,7 @@ export class Analysis extends React.Component <any, any> {
             </div>
             <div className="discuss-comment">{comment}</div>
             {repliedComment ?
-              <div className="discuss-replied-comment">{'//'}{repliedName}:{repliedComment}</div> : null}
+              <div className="discuss-replied-comment">{'回复 '}{repliedName}:{repliedComment}</div> : null}
             <div className="discuss-time">{discussTime}</div>
           </div>
           <hr className="discuss-hr"/>

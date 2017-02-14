@@ -2,7 +2,7 @@ var Router = require("express").Router;
 
 var router = new Router();
 
-router.get("//rise/practice/warmup/start/*", (req, res) => {
+router.get("/rise/practice/warmup/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
@@ -86,7 +86,7 @@ router.get("//rise/practice/warmup/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("//rise/practice/warmup/analysis/*", (req, res) => {
+router.get("/rise/practice/warmup/analysis/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -137,7 +137,7 @@ router.get("//rise/practice/warmup/analysis/*", (req, res) => {
               {
                 "id":2,
                 "repliedId": 1,
-                "comment":"回复评论评论评论",
+                "comment":"回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论",
                 "repliedName": "风之伤",
                 "repliedComment": "评论评论评论",
                 "warmupPracticeId": 49,
@@ -206,7 +206,7 @@ router.get("//rise/practice/warmup/analysis/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("//rise/practice/warmup/answer/*", (req, res) => {
+router.post("/rise/practice/warmup/answer/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -217,7 +217,7 @@ router.post("//rise/practice/warmup/answer/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("//rise/practice/next/*", (req, res) => {
+router.get("/rise/practice/next/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -237,7 +237,7 @@ router.get("//rise/practice/next/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("//rise/practice/application/start/*", (req, res) => {
+router.get("/rise/practice/application/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -252,7 +252,7 @@ router.get("//rise/practice/application/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.get("//rise/practice/challenge/start/*", (req, res) => {
+router.get("/rise/practice/challenge/start/*", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
@@ -268,7 +268,7 @@ router.get("//rise/practice/challenge/start/*", (req, res) => {
 		}), Math.random() * 1500)
 });
 
-router.post("//rise/practice/discuss", (req, res) => {
+router.post("/rise/practice/discuss", (req, res) => {
   setTimeout(() =>
     res.status(200).json({
       "code": 200,
@@ -276,7 +276,7 @@ router.post("//rise/practice/discuss", (req, res) => {
     }), Math.random() * 1500)
 });
 
-router.get("//rise/practice/load/discuss/*/*", (req, res) => {
+router.get("/rise/practice/load/discuss/*/*", (req, res) => {
   setTimeout(() =>
     res.status(200).json({
       "code": 200,
