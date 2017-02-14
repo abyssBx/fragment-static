@@ -201,6 +201,19 @@ export class Analysis extends React.Component <any, any> {
             <a name="discuss"/>
             <div className="discuss-title-bar"><span className="discuss-title">讨论区</span></div>
             {discussList.map((discuss, idx) => discussRender(discuss, idx))}
+            { discussList.length > 0 ?
+              <div className="discuss-end">
+                你已经浏览完所有的讨论啦
+              </div>
+              :
+              <div className="discuss-end">
+                <div className="discuss-end-img">
+                  <AssetImg type="no_comment" width={94} height={92}></AssetImg>
+                </div>
+                <span className="discuss-end-span">点击左侧按钮，发表第一个好问题吧</span>
+
+              </div>
+            }
           </div>
         </div>
       )
