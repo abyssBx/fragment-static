@@ -86,7 +86,7 @@ export class Main extends React.Component <any, any> {
               <div className="pc-homework">
                 <div className="guide">圈外社区链接</div>
                 <div className="sub-guide">（推荐使用电脑端浏览器访问）</div>
-                <div className="url">{"http://www.iquanwai.com/community"}</div>
+                <div className="url">{"www.iquanwai.com/community"}</div>
               </div>
             </div>
           </div>
