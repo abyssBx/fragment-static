@@ -179,7 +179,12 @@ export class PlanMain extends React.Component <any, any> {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
-        this.setState({ showCompleteModal: true })
+        if(msg === 'true')
+        {
+          this.setState({showCompleteModal: true})
+        }else{
+          dispatch(alertMsg('请先完成今日的必做训练'))
+        }
       } else {
         dispatch(alertMsg(msg))
       }

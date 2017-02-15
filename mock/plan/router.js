@@ -244,7 +244,7 @@ router.post("/rise/plan/complete", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"code": 200,
-			"msg": "ok"
+			"msg": "true"
 		}), Math.random() * 1500)
 });
 
