@@ -13,6 +13,7 @@ import { Result as WarmUpResult } from "modules/practice/warmup/Result";
 import { Ready as WarmUpReady } from "modules/practice/warmup/Ready";
 import { Main as Application } from "modules/practice/application/Main";
 import { Main as Challenge } from "modules/practice/challenge/Main";
+import { Submit as ApplicationPracticeSubmit } from "modules/practice/application/Submit";
 
 const routes = (
   <Route path="/rise/static" component={Base}>
@@ -28,6 +29,7 @@ const routes = (
     <Route path="practice/warmup/ready" component={WarmUpReady}/>
     <Route path="practice/application" component={Application}/>
     <Route path="practice/challenge" component={Challenge}/>
+    <Route path="practice/application/submit" component={ApplicationPracticeSubmit}/>
   </Route>
 )
 

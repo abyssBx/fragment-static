@@ -1,9 +1,7 @@
 @import "../../../style/variable";
 
 .application {
-  height: 100%;
   .intro-container {
-    height: ~"calc(100% - 49px)";
     overflow: auto;
     .application-context {
       color: @color_context;
@@ -52,31 +50,88 @@
       height: 30px;
       margin-top: 15px;
     }
-    > .pc-homework {
-      position: relative;
-      left: 50%;
-      margin-left: -135px;
-      width: 270px;
-      margin-top: 30px;
+    > .submit-bar {
+      margin-top: 25px;
+      width: 100%;
+      background-color: #f5f5f5;
+      font-size: 11px;
+      > .padding {
+        margin-left: 15px;
+      }
+    }
+    > .no-comment{
+      font-size: 11px;
       text-align: center;
-      > .guide {
-        font-size: 12px;
-        line-height: 12px;
-        color: @color_context;
+      > .submit{
+        margin: 15px auto 0;
+        width: 70px;
+        background-color: @color_theme;
+        color: #ffffff;
       }
-      > .sub-guide {
-        font-size: 10px;
-        line-height: 10px;
-        color: #666666;
-        margin-top: 4px;
+      > .content{
+        margin-top: 15px;
+        margin-bottom: 20px;
+        > .text{
+          line-height: 20px;
+          color: #666666;
+        }
       }
-      > .url {
-        height: 105px;
-        margin-top: 10px;
-        font-size: 13px;
-        line-height: 105px;
-        border: 1px dashed #cccccc;
-        color: @color_context;
+    }
+    > .has-comment{
+      > .submit-cell {
+        margin-top: 15px;
+        > .submit-avatar {
+          display: inline-block;
+          vertical-align: top;
+          height: 30px;
+          width: 30px;
+          > .submit-avatar-img {
+            height: 30px;
+            width: 30px;
+            border-radius: 15px;
+          }
+        }
+        > .submit-area {
+          display: inline-block;
+          margin-left: 5px;
+          width: ~"calc(100% - 30px - 5px)";
+          > .submit-head {
+            height: 30px;
+            > .submit-name {
+              display: inline-block;
+              color: #666666;
+              font-size: 13px;
+            }
+            > .right{
+              float: right;
+              display: inline-block;
+              > .submit-icon {
+                float: left;
+                display: inline-block;
+                margin-right: 5px;
+                margin-top: 2px;
+              }
+              > .submit-button {
+                display: inline-block;
+                color: #55cbcb;
+                font-size: 13px;
+                line-height: 30px;
+              }
+            }
+          }
+          > .submit-comment {
+            font-size: 13px;
+            margin-top: 2px;
+            width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+          }
+          > .submit-time {
+            font-size: 13px;
+            color: #999999;
+          }
+
+        }
       }
     }
   }

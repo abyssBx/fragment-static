@@ -15,6 +15,7 @@ export class Main extends React.Component <any, any> {
       data: {},
       knowledge: {},
       showKnowledge: false,
+      submitId: 0,
     }
   }
 
@@ -37,18 +38,28 @@ export class Main extends React.Component <any, any> {
     loadApplicationPractice(location.query.appId).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState({ data: msg })
+      if (code === 200)  this.setState({ data: msg, submitId: msg.submitId })
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
     })
+    location.href = 'submit'
   }
 
   onSubmit() {
+    const { location } = this.props
     this.context.router.push({
       pathname: '/rise/static/plan/main',
-      query: { series: this.props.location.query.series }
+      query: { series: location.query.series }
+    })
+  }
+
+  onEdit() {
+    const { location } = this.props
+    this.context.router.push({
+      pathname: '/rise/static/practice/application/submit',
+      query: { appId: location.query.appId, series: location.query.series, id: location.query.id}
     })
   }
 
@@ -58,7 +69,7 @@ export class Main extends React.Component <any, any> {
 
   render() {
     const { data, knowledge = {}, showKnowledge } = this.state
-    const { voice, pic, description } = data
+    const { voice, pic, description, content, submitUpdateTime } = data
 
     return (
       <div>
@@ -83,11 +94,46 @@ export class Main extends React.Component <any, any> {
                 </div>
               </div>
               <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
-              <div className="pc-homework">
-                <div className="guide">圈外社区链接</div>
-                <div className="sub-guide">（推荐使用电脑端浏览器访问）</div>
-                <div className="url">{"www.iquanwai.com/community"}</div>
-              </div>
+              <a name="submit"/>
+              <div className="submit-bar"><span className="padding"></span>提交方式</div>
+              { content === null?
+                <div className="no-comment">
+                  <AssetImg type="mobile" height={65} marginTop={15}/>
+                  <div className="submit" onClick={this.onEdit.bind(this)}>手机提交</div>
+                  <div className="content">
+                    <div className="text">windows电脑微信客户端也适用</div>
+                  </div>
+                  <AssetImg type="pc" height={65} marginTop={15}/>
+                  <div className="content">
+                    <div className="text">更喜欢电脑上提交?</div>
+                    <div className="text">登录www.iquanwai.com/community</div>
+                  </div>
+                </div>
+                :
+                <div className="has-comment">
+                  <div className="submit-cell">
+                    <div className="submit-avatar"><img className="submit-avatar-img" src={''} /></div>
+                    <div className="submit-area">
+                      <div className="submit-head">
+                        <div className="submit-name">
+                          {'丁志君'}
+                        </div>
+                        <div className="right">
+                          <div className="submit-icon">
+                            <AssetImg type="edit" height={20}/>
+                          </div>
+                          <div className="submit-button"
+                               onClick={this.onEdit.bind(this)}>
+                            编辑
+                          </div>
+                        </div>
+                      </div>
+                      <div className="submit-content"><pre>{content}</pre></div>
+                      <div className="submit-time">{submitUpdateTime}</div>
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
           </div>
         </div>

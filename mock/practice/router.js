@@ -137,7 +137,7 @@ router.get("/rise/practice/warmup/analysis/*", (req, res) => {
               {
                 "id":2,
                 "repliedId": 1,
-                "comment":"回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论回复评论评论评论",
+                "comment":"回复回复",
                 "repliedName": "风之伤",
                 "repliedComment": "评论评论评论",
                 "warmupPracticeId": 49,
@@ -247,7 +247,10 @@ router.get("/rise/practice/application/start/*", (req, res) => {
 				"pic": "http://www.iquanwai.com/images/cintro1.png",
 				"knowledgeId": 1,
 				"sceneId": 1,
-				"difficulty": null
+				"difficulty": null,
+        "content": "评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论", //提交内容
+        "submitId": 1, //提交id
+        "submitUpdateTime": "2017-02-15" //最后提交时间
 			}
 		}), Math.random() * 1500)
 });
@@ -262,8 +265,9 @@ router.get("/rise/practice/challenge/start/*", (req, res) => {
 				"pic": "http://www.iquanwai.com/images/cintro1.png",  //图片url
 				"problemId": 1, //问题id
 				"pcurl": "http://someurl", //pc端url
-				"submitted": true, //是否提交过
-				"content": "balbal" //提交内容
+				"content": "balbal", //提交内容
+        "submitId": 1, //提交id
+        "submitUpdateTime": "2017-02-15" //最后提交时间
 			}
 		}), Math.random() * 1500)
 });
@@ -305,6 +309,22 @@ router.get("/rise/practice/load/discuss/*/*", (req, res) => {
           "discussTime":"10:38"
         }
       ]
+    }), Math.random() * 1500)
+});
+
+router.post("/rise/practice/application/submit/*", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json({
+      "code": 200,
+      "msg": "ok"
+    }), Math.random() * 1500)
+});
+
+router.post("/rise/practice/challenge/submit/*", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json({
+      "code": 200,
+      "msg": "ok"
     }), Math.random() * 1500)
 });
 
