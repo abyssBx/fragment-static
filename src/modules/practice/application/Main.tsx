@@ -26,7 +26,7 @@ export class Main extends React.Component <any, any> {
   componentWillMount() {
     const { dispatch, location } = this.props
     dispatch(startLoad())
-    loadKnowledgeIntro(location.query.id).then(res => {
+    loadKnowledgeIntro(location.query.kid).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200)  this.setState({ knowledge: msg })
@@ -35,16 +35,21 @@ export class Main extends React.Component <any, any> {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
     })
-    loadApplicationPractice(location.query.appId).then(res => {
+    loadApplicationPractice(location.query.id).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
-      if (code === 200)  this.setState({ data: msg, submitId: msg.submitId })
+      if (code === 200) {
+        const { content } = msg
+        this.setState({data: msg, submitId: msg.submitId})
+        if (content !== null){
+          window.location.href = '#submit'
+        }
+      }
       else dispatch(alertMsg(msg))
     }).catch(ex => {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
     })
-    location.href = 'submit'
   }
 
   onSubmit() {
@@ -59,7 +64,7 @@ export class Main extends React.Component <any, any> {
     const { location } = this.props
     this.context.router.push({
       pathname: '/rise/static/practice/application/submit',
-      query: { appId: location.query.appId, series: location.query.series, id: location.query.id}
+      query: { id: location.query.id, series: location.query.series, kid: location.query.kid}
     })
   }
 
@@ -85,7 +90,7 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="application-context">
                 <div className="section1">
-                  <p>好了，学以致用一下吧！结合相关知识点，思考并实践下面的任务。在圈外社区里记录下你的经历，还会收获积分。</p>
+                  <p>好了，学以致用一下吧！结合相关知识点，思考并实践下面的任务。记录下你的经历，还会收获积分。</p>
                 </div>
                 <div className="application-title">
                   <AssetImg type="app" size={15}/><span>今日应用</span>
@@ -95,13 +100,13 @@ export class Main extends React.Component <any, any> {
               </div>
               <div className="knowledge-link" onClick={() => this.setState({showKnowledge: true})}>点击查看知识点</div>
               <a name="submit"/>
-              <div className="submit-bar"><span className="padding"></span>提交方式</div>
+              <div className="submit-bar"><span className="padding"></span>{ content === null?'提交方式':'我的作业'}</div>
               { content === null?
                 <div className="no-comment">
                   <AssetImg type="mobile" height={65} marginTop={15}/>
                   <div className="submit" onClick={this.onEdit.bind(this)}>手机提交</div>
                   <div className="content">
-                    <div className="text">windows电脑微信客户端也适用</div>
+                    <div className="text">windows微信客户端也适用</div>
                   </div>
                   <AssetImg type="pc" height={65} marginTop={15}/>
                   <div className="content">
@@ -112,23 +117,22 @@ export class Main extends React.Component <any, any> {
                 :
                 <div className="has-comment">
                   <div className="submit-cell">
-                    <div className="submit-avatar"><img className="submit-avatar-img" src={''} /></div>
+                    <div className="submit-avatar"><img className="submit-avatar-img" src={window.ENV.headImage} /></div>
                     <div className="submit-area">
                       <div className="submit-head">
                         <div className="submit-name">
-                          {'丁志君'}
+                          {window.ENV.userName}
                         </div>
-                        <div className="right">
+                        <div className="right" onClick={this.onEdit.bind(this)}>
                           <div className="submit-icon">
                             <AssetImg type="edit" height={20}/>
                           </div>
-                          <div className="submit-button"
-                               onClick={this.onEdit.bind(this)}>
+                          <div className="submit-button">
                             编辑
                           </div>
                         </div>
                       </div>
-                      <div className="submit-content"><pre>{content}</pre></div>
+                      <pre className="submit-content">{content}</pre>
                       <div className="submit-time">{submitUpdateTime}</div>
                     </div>
                   </div>

@@ -127,7 +127,7 @@ export class PlanMain extends React.Component <any, any> {
     } else if (type === 11) {
       this.context.router.push({
         pathname: '/rise/static/practice/application',
-        query: { appId: item.practiceIdList[0], id: knowledge.id, series, practicePlanId }
+        query: { id: item.practiceIdList[0], kid: knowledge.id, series, practicePlanId }
       })
     } else if (type === 21) {
       this.context.router.push({

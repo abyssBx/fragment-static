@@ -15,7 +15,3 @@ export function loadWarmUpNext(id) {
 export function submitApplicationPractice(submitId, params) {
   return ppost(`/rise/practice/application/submit/${submitId}`, params)
 }
-
-export function submitChallengePractice(submitId, params) {
-  return ppost(`/rise/practice/challenge/submit/${submitId}`, params)
-}
