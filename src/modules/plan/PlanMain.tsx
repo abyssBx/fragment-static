@@ -179,7 +179,7 @@ export class PlanMain extends React.Component <any, any> {
       dispatch(endLoad())
       const { code, msg } = res
       if (code === 200) {
-        if(msg === 'true')
+        if(msg === true)
         {
           this.setState({showCompleteModal: true})
         }else{
