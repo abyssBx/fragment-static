@@ -30,7 +30,6 @@ export class Main extends React.Component <any, any> {
       if (code === 200) {
         const { content } = msg
         this.setState({data: msg, submitId: msg.submitId})
-        console.log(content)
         if (content !== null){
           window.location.href = '#submit'
         }
@@ -110,7 +109,7 @@ export class Main extends React.Component <any, any> {
                         </div>
                         <div className="right" onClick={this.onEdit.bind(this)}>
                           <div className="submit-icon">
-                            <AssetImg type="edit" height={20}/>
+                            <AssetImg type="edit" height={17}/>
                           </div>
                           <div className="submit-button">
                             编辑

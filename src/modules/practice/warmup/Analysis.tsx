@@ -229,9 +229,13 @@ export class Analysis extends React.Component <any, any> {
               <div className="discuss-name">
                 {name}
               </div>
-              <div className="discuss-replied-button"
-                   onClick={() => this.setState({showDiscuss: true, warmupPracticeId, repliedId:id})}>
-                回复
+              <div className="right" onClick={() => this.setState({showDiscuss: true, warmupPracticeId, repliedId:id})}>
+                <div className="reply-icon">
+                  <AssetImg type="reply" height={17}/>
+                </div>
+                <div className="discuss-replied-button">
+                  回复
+                </div>
               </div>
             </div>
             <div className="discuss-comment">{comment}</div>

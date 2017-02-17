@@ -99,7 +99,6 @@ export class Main extends React.Component <any, any> {
     if (currentIndex < practiceCount - 1) {
       this.setChoice()
     } else {
-      console.log('complete')
       this.setChoice(p => {
         dispatch(startLoad())
         answer({ practice: p }, practicePlanId).then(res => {

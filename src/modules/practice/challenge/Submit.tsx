@@ -12,6 +12,7 @@ export class Submit extends React.Component<any, any> {
       data: {},
       submitId: 0,
       answer: '',
+      showDisable: false,
     }
   }
 
@@ -36,6 +37,15 @@ export class Submit extends React.Component<any, any> {
     const { dispatch, location} = this.props
     const { data, answer } = this.state
     const { submitId } = data
+    if(answer.length==0){
+      dispatch(alertMsg('请填写作业'))
+      return
+    }
+    if(answer.length>3000){
+      dispatch(alertMsg('您的作业字数已超过3000字'))
+      return
+    }
+    this.setState({showDisable: true})
     submitChallengePractice(submitId, {answer}).then(res => {
       dispatch(endLoad())
       const { code, msg } = res
@@ -43,16 +53,19 @@ export class Submit extends React.Component<any, any> {
         this.context.router.push({ pathname: '/rise/static/practice/challenge',
           query: {id: location.query.id, series: location.query.series}})
       }
-      else dispatch(alertMsg(msg))
+      else {
+        dispatch(alertMsg(msg))
+        this.setState({showDisable: false})
+      }
     }).catch(ex => {
       dispatch(endLoad())
       dispatch(alertMsg(ex))
+      this.setState({showDisable: false})
     })
   }
 
   render() {
-    const { data } = this.state
-    const { description } = data
+    const { data,showDisable } = this.state
     return (
       <div className="submit">
         <div className="description">
@@ -64,7 +77,11 @@ export class Submit extends React.Component<any, any> {
                     value={this.state.answer}
                     placeholder="写下你的作业（限3000字）"
                     onChange={(e) => this.setState({answer: e.currentTarget.value})}></textarea>
-        <div className="submit-button" onClick={this.onSubmit.bind(this)}>提交</div>
+        { showDisable ?
+          <div className="submit-button disabled">提交中</div>
+          :
+          <div className="submit-button" onClick={this.onSubmit.bind(this)}>提交</div>
+        }
       </div>
     )
   }
