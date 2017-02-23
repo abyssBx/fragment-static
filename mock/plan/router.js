@@ -114,7 +114,8 @@ router.get("/rise/plan/load", (req, res) => {
 					"sequence": 4
 				}],
 				"length": 7,
-				"deadline": 11
+				"deadline": 11,
+        "openRise":false
 			}, "code": 200
 		}), Math.random() * 1500)
 });
@@ -254,6 +255,14 @@ router.post("/rise/plan/close", (req, res) => {
 			"code": 200,
 			"msg": "ok"
 		}), Math.random() * 1500)
+});
+
+router.post('/rise/plan/openrise',(req,res)=>{
+  setTimeout(()=>
+    res.status(200).json({
+      "code":200,
+      "msg":"ok"
+    }),Math.random() * 1500)
 });
 
 module.exports = router;
