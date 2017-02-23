@@ -7,10 +7,10 @@ export default class Tutorial extends React.Component<any,any>{
   constructor(props){
     super(props);
     this.state = {
-      bgList:["http://www.confucius.mobi/images/riseTutorial0.png","http://www.confucius.mobi/images/riseTutorial1.png",
-        "http://www.confucius.mobi/images/riseTutorial2.png","http://www.confucius.mobi/images/riseTutorial3.png",
-        "http://www.confucius.mobi/images/riseTutorial4.png","http://www.confucius.mobi/images/riseTutorial5.png",
-        "http://www.confucius.mobi/images/riseTutorial6.png","http://www.confucius.mobi/images/riseTutorial7.png"],
+      bgList:["http://www.iquanwai.com/images/riseTutorial0.png","http://www.iquanwai.com/images/riseTutorial1.png",
+        "http://www.iquanwai.com/images/riseTutorial2.png","http://www.iquanwai.com/images/riseTutorial3.png",
+        "http://www.iquanwai.com/images/riseTutorial4.png","http://www.iquanwai.com/images/riseTutorial5.png",
+        "http://www.iquanwai.com/images/riseTutorial6.png","http://www.iquanwai.com/images/riseTutorial7.png"],
       index:0,
       onShowEnd:props.onShowEnd || function(){console.log('显示完成')}
     }
