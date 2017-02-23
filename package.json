@@ -10,7 +10,8 @@
     "dev": "PROXY=http://0.0.0.0:3000/ npm start",
     "dist": "NODE_ENV=production webpack",
     "ftp": "NODE_ENV=production webpack; gulp ftp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "PROXY=http://0.0.0.0:8080/ npm start"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "react-router": "^2.6.1",
     "react-slick": "^0.12.2",
     "react-sound": "^0.5.2",
+    "react-swipeable-views": "^0.10.8",
     "react-tap-event-plugin": "^1.0.0",
     "react-weui": "^0.4.0",
     "redux": "^3.5.2",

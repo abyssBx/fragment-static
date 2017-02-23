@@ -27,3 +27,7 @@ export function completePlan() {
 export function closePlan() {
   return ppost(`/rise/plan/close`)
 }
+
+export function updateOpenRise(){
+  return ppost(`/rise/plan/openrise`)
+}

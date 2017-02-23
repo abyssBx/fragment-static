@@ -1,9 +1,11 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import "./PlanMain.less";
-import { loadPlan, loadPlanHistory, loadWarmUpNext, completePlan, closePlan } from "./async";
+import { loadPlan, loadPlanHistory, loadWarmUpNext, completePlan, closePlan,updateOpenRise } from "./async";
 import { startLoad, endLoad, alertMsg } from "redux/actions";
 import AssetImg from "../../components/AssetImg";
+import Tutorial from "../../components/Tutorial"
+import {merge,isBoolean} from "lodash"
 
 const typeMap = {
   1: '热身训练',
@@ -221,11 +223,26 @@ export class PlanMain extends React.Component <any, any> {
     })
   }
 
+  tutorialEnd(){
+    const {dispatch} = this.props;
+    const {planData} = this.state;
+    dispatch(startLoad());
+    updateOpenRise().then(res => {
+      dispatch(endLoad());
+      const {code,msg} = res;
+      if(code === 200){
+        this.setState({planData:merge({},planData,{openRise:true})});
+      } else {
+        dispatch(alertMsg(msg));
+      }
+    })
+  }
+
   render() {
     const { planData, showCompleteModal, showConfirmModal } = this.state
     const {
       problem = {}, practice, warmupComplete, applicationComplete, point, total,
-      deadline, status, currentSeries, totalSeries, series
+      deadline, status, currentSeries, totalSeries, series,openRise
     } = planData
 
     const practiceRender = (list = []) => {
@@ -302,6 +319,11 @@ export class PlanMain extends React.Component <any, any> {
             </div>
           </div>
           : null }
+        { isBoolean(openRise) && !openRise?
+          <div className="mask" style={{backgroundColor: 'rgba(0, 0, 0, 0.8)',position:'fixed'}}>
+            <Tutorial onShowEnd={()=>this.tutorialEnd()}/>
+          </div>
+          :null}
         { status === 3 ?
           <div className="mask">
             <div className="finished_modal">
